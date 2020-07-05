@@ -1,13 +1,15 @@
 import * as t from "./lib/three.js-r115/build/three.module.js";
 
-function main() {
+let canvas, renderer, camera, scene, cube;
+
+function setup() {
 
     //drawing tools
-    const canvas = document.querySelector('canvas');
-    const renderer = new t.WebGLRenderer({canvas: canvas});
-    const camera = new t.PerspectiveCamera(45, 2, 0.1, 5);
+    canvas = document.querySelector('canvas');
+    renderer = new t.WebGLRenderer({canvas: canvas});
+    camera = new t.PerspectiveCamera(45, 2, 0.1, 5);
     camera.position.z = 4;
-    const scene = new t.Scene();
+    scene = new t.Scene();
 
     //light
     {
@@ -22,12 +24,14 @@ function main() {
     //cube
     const geometry = new t.TetrahedronGeometry(1);
     const material = new t.MeshPhongMaterial({color: 0x44aa88});
-    const cube = new t.Mesh(geometry, material);
+    cube = new t.Mesh(geometry, material);
 
     scene.add(cube);
     
+}
 
-    //animation loop
+//animation loop
+function draw() {
     function render(time) {
         time *= 0.001; //ms to s
 
@@ -43,8 +47,10 @@ function main() {
         renderer.render(scene, camera);
         requestAnimationFrame(render) //loop on frame
     }
+
     requestAnimationFrame(render); //kick off loop
-    
+
 }
 
-main();
+setup();
+draw();
