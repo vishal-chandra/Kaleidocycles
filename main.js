@@ -2,6 +2,7 @@ import * as t from "./lib/three.js-r115/build/three.module.js";
 
 let canvas, renderer, camera, scene, cube;
 
+//init
 function setup() {
 
     //drawing tools
@@ -25,13 +26,13 @@ function setup() {
     const geometry = new t.TetrahedronGeometry(1);
     const material = new t.MeshPhongMaterial({color: 0x44aa88});
     cube = new t.Mesh(geometry, material);
-
     scene.add(cube);
     
 }
 
 //animation loop
 function draw() {
+    
     function render(time) {
         time *= 0.001; //ms to s
 
