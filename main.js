@@ -31,6 +31,11 @@ function main() {
     function render(time) {
         time *= 0.001; //ms to s
 
+        //handle resize
+        const canvas = renderer.domElement;
+        camera.aspect = canvas.clientWidth / canvas.clientHeight; 
+        camera.updateProjectionMatrix();
+
         //full rotation about once every 6.3s
         cube.rotation.x = time;
         cube.rotation.y = time;
@@ -39,7 +44,7 @@ function main() {
         requestAnimationFrame(render) //loop on frame
     }
     requestAnimationFrame(render); //kick off loop
-
+    
 }
 
 main();
