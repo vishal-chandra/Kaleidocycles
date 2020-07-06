@@ -42,6 +42,14 @@ function setup() {
     slider1.addEventListener(
         'input', function() {onSliderChange(slider1.value)}
     );
+
+    let checkbox1 = document.getElementById('checkbox1');
+    checkbox1.addEventListener(
+        'change', function() {
+            if(checkbox1.checked) scene.add(cube);
+            else scene.remove(cube);
+        }
+    )
     
 }
 
