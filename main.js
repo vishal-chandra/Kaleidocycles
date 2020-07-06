@@ -3,6 +3,7 @@ import {OrbitControls} from "./lib/three.js-r115/examples/jsm/controls/OrbitCont
 import {Kaleidocycle} from "./kaleidocycle.js"
 
 let canvas, renderer, camera, controls, scene, cube, kal;
+let u, v, w;
 
 //init
 function setup() {
@@ -25,9 +26,12 @@ function setup() {
     scene.add(new t.AxesHelper(100));
 
     //kal parts
-    scene.add(new t.ArrowHelper(kal.u, new t.Vector3(0,0,0)));
-    scene.add(new t.ArrowHelper(kal.v, new t.Vector3(0,0,0)));
-    scene.add(new t.ArrowHelper(kal.w, new t.Vector3(0,0,0)));
+    u = new t.ArrowHelper(kal.u, new t.Vector3(0,0,0));
+    scene.add(u)
+    v = new t.ArrowHelper(kal.v, new t.Vector3(0,0,0));
+    scene.add(v);
+    w = new t.ArrowHelper(kal.w, new t.Vector3(0,0,0));
+    scene.add(w);
 
     //light
     {
@@ -82,6 +86,8 @@ function draw() {
 
     function render(time) {
         time *= 0.001; //ms to s
+        kal.time = time;
+        updateArrows();
 
         //handle resize
         if(resizeRenderer(renderer)) {
@@ -103,6 +109,13 @@ function draw() {
 
 function onSliderChange(value) {
     cube.position.x = value;
+}
+
+function updateArrows() {
+    kal.updateVectors();
+    u.setDirection(kal.u);
+    v.setDirection(kal.v);
+    w.setDirection(kal.w);
 }
 
 setup();
