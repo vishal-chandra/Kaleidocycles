@@ -1,13 +1,12 @@
 import * as t from "./lib/three.js-r115/build/three.module.js";
 
-let canvas, renderer, camera, scene, cube;
+let renderer, camera, scene, cube;
 
 //init
 function setup() {
 
     //drawing tools
-    canvas = document.querySelector('canvas');
-    renderer = new t.WebGLRenderer({canvas: canvas});
+    renderer = new t.WebGLRenderer({canvas: document.querySelector('canvas')});
     camera = new t.PerspectiveCamera(45, 2, 0.1, 5);
     camera.position.z = 4;
     scene = new t.Scene();
@@ -38,14 +37,33 @@ function setup() {
 
 //animation loop
 function draw() {
+    
+    //sets the renderer's resolution to the canvas size
+    function resizeRenderer(renderer) {
+        let canvas = renderer.domElement;
+        let displayWidth = canvas.clientWidth;
+        let displayHeight = canvas.clientHeight;
+        let drawWidth = canvas.width;
+        let drawHeight = canvas.height;
 
+        //console.log(displayWidth, drawWidth, displayHeight, drawHeight);
+
+        let needResize = drawHeight !== displayHeight || drawWidth !== displayWidth;
+        if(needResize) {
+            renderer.setSize(displayWidth, displayHeight, false);
+        }
+        return needResize; //return whether or not we resized
+    }
+    
     function render(time) {
         time *= 0.001; //ms to s
 
         //handle resize
-        const canvas = renderer.domElement;
-        camera.aspect = canvas.clientWidth / canvas.clientHeight; 
-        camera.updateProjectionMatrix();
+        if(resizeRenderer(renderer)) {
+            const canvas = renderer.domElement;
+            camera.aspect = canvas.clientWidth / canvas.clientHeight; 
+            camera.updateProjectionMatrix();
+        }
 
         //full rotation about once every 6.3s
         cube.rotation.x = time;
