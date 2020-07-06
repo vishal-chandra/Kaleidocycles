@@ -1,16 +1,25 @@
 import * as t from "./lib/three.js-r115/build/three.module.js";
+import {OrbitControls} from "./lib/three.js-r115/examples/jsm/controls/OrbitControls.js";
 
-let canvas, renderer, camera, scene, cube;
+let canvas, renderer, camera, controls, scene, cube;
 
 //init
 function setup() {
 
     //drawing tools
     renderer = new t.WebGLRenderer({canvas: document.querySelector('canvas')});
-    canvas = renderer.domElement;
-    camera = new t.PerspectiveCamera(45, 2, 0.1, 5);
+    canvas = renderer.domElement; //pretty sure this is the same as selecting from doc
+    camera = new t.PerspectiveCamera(45, 2, 0.1, 100);
+
+    controls = new OrbitControls(camera, canvas);
     camera.position.z = 4;
+    controls.update();
+
     scene = new t.Scene();
+    scene.background = new t.Color('white');
+
+    //axes
+    scene.add(new t.AxesHelper(100));
 
     //light
     {
@@ -27,9 +36,6 @@ function setup() {
     const material = new t.MeshPhongMaterial({color: 0x44aa88});
     cube = new t.Mesh(geometry, material);
     scene.add(cube);
-
-    //axes
-    scene.add(new t.AxesHelper(5));
 
     //event listeners
     let slider1 = document.getElementById('slider1');
