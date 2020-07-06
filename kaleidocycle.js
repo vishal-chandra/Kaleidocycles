@@ -1,3 +1,7 @@
+/**
+ * A class to encapsulate the data of the kaleidocycle itself
+ */
+
 import {Vector3, Matrix3} from "./lib/three.js-r115/build/three.module.js";
 
 export class Kaleidocycle {
@@ -9,7 +13,7 @@ export class Kaleidocycle {
         this.n = number; //how many tetrahedra
         this.a = 2 * Math.PI / this.n; //alpha
 
-        this.time = 0; //"time"–really the rotation angle
+        this.time = 0; //"time" – really the rotation angle
 
         //normed vectors
         this.u = this.calculate_u(this.time);
