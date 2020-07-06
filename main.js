@@ -1,12 +1,13 @@
 import * as t from "./lib/three.js-r115/build/three.module.js";
 
-let renderer, camera, scene, cube;
+let canvas, renderer, camera, scene, cube;
 
 //init
 function setup() {
 
     //drawing tools
     renderer = new t.WebGLRenderer({canvas: document.querySelector('canvas')});
+    canvas = renderer.domElement;
     camera = new t.PerspectiveCamera(45, 2, 0.1, 5);
     camera.position.z = 4;
     scene = new t.Scene();
@@ -27,7 +28,10 @@ function setup() {
     cube = new t.Mesh(geometry, material);
     scene.add(cube);
 
+    //axes
+    scene.add(new t.AxesHelper(5));
 
+    //event listeners
     let slider1 = document.getElementById('slider1');
     slider1.addEventListener(
         'input', function() {onSliderChange(slider1.value)}
@@ -40,7 +44,6 @@ function draw() {
     
     //sets the renderer's resolution to the canvas size
     function resizeRenderer(renderer) {
-        let canvas = renderer.domElement;
         let displayWidth = canvas.clientWidth;
         let displayHeight = canvas.clientHeight;
         let drawWidth = canvas.width;
@@ -54,13 +57,12 @@ function draw() {
         }
         return needResize; //return whether or not we resized
     }
-    
+
     function render(time) {
         time *= 0.001; //ms to s
 
         //handle resize
         if(resizeRenderer(renderer)) {
-            const canvas = renderer.domElement;
             camera.aspect = canvas.clientWidth / canvas.clientHeight; 
             camera.updateProjectionMatrix();
         }
