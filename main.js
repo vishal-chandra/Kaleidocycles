@@ -39,6 +39,7 @@ function setup() {
     //light
     const light = new t.DirectionalLight(0xFFFFFF, 1.0);
     light.position.set(-1, 2, 4);
+    scene.add(light);
 
     //axes
     scene.add(new t.AxesHelper(100));
