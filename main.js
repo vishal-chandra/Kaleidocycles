@@ -27,12 +27,18 @@ function setup() {
     const material = new t.MeshPhongMaterial({color: 0x44aa88});
     cube = new t.Mesh(geometry, material);
     scene.add(cube);
+
+
+    let slider1 = document.getElementById('slider1');
+    slider1.addEventListener(
+        'input', function() {onSliderChange(slider1.value)}
+    );
     
 }
 
 //animation loop
 function draw() {
-    
+
     function render(time) {
         time *= 0.001; //ms to s
 
@@ -51,6 +57,10 @@ function draw() {
 
     requestAnimationFrame(render); //kick off loop
 
+}
+
+function onSliderChange(value) {
+    cube.position.x = value;
 }
 
 setup();
