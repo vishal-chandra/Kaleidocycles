@@ -1,10 +1,13 @@
 import * as t from "./lib/three.js-r115/build/three.module.js";
 import {OrbitControls} from "./lib/three.js-r115/examples/jsm/controls/OrbitControls.js";
+import {Kaleidocycle} from "./kaleidocycle.js"
 
-let canvas, renderer, camera, controls, scene, cube;
+let canvas, renderer, camera, controls, scene, cube, kal;
 
 //init
 function setup() {
+
+    kal = new Kaleidocycle(1, 8);
 
     //drawing tools
     renderer = new t.WebGLRenderer({canvas: document.querySelector('canvas')});
@@ -20,6 +23,11 @@ function setup() {
 
     //axes
     scene.add(new t.AxesHelper(100));
+
+    //kal parts
+    scene.add(new t.ArrowHelper(kal.u, new t.Vector3(0,0,0)));
+    scene.add(new t.ArrowHelper(kal.v, new t.Vector3(0,0,0)));
+    scene.add(new t.ArrowHelper(kal.w, new t.Vector3(0,0,0)));
 
     //light
     {
