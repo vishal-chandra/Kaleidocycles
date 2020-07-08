@@ -44,18 +44,17 @@ function setup() {
     //axes
     scene.add(new t.AxesHelper(100));
 
-    //show normed vectors
-    u = new t.ArrowHelper(kal.u, new t.Vector3(0,0,0));
-    scene.add(u)
-    v = new t.ArrowHelper(kal.v, new t.Vector3(0,0,0));
-    scene.add(v);
-    w = new t.ArrowHelper(kal.w, new t.Vector3(0,0,0));
-    scene.add(w);
+    //show norms
+    // u = new t.ArrowHelper(kal.u, new t.Vector3(0,0,0));
+    // scene.add(u)
+    // v = new t.ArrowHelper(kal.v, new t.Vector3(0,0,0));
+    // scene.add(v);
+    // w = new t.ArrowHelper(kal.w, new t.Vector3(0,0,0));
+    // scene.add(w);
 
     //tet
-    const geometry = new t.TetrahedronGeometry(1);
     const material = new t.MeshPhongMaterial({color: 0x44aa88});
-    tet = new t.Mesh(geometry, material);
+    tet = new t.Mesh(kal.principalGeometry, material);
     scene.add(tet);
 
     /**
@@ -83,7 +82,7 @@ function setup() {
  */
 function draw() {
     
-    //sets the renderer's resolution to the canvas size
+    //sets the renderer's resolution to the canvas size when needed
     function resizeRenderer(renderer) {
         let displayWidth = canvas.clientWidth;
         let displayHeight = canvas.clientHeight;
@@ -104,12 +103,7 @@ function draw() {
         */
         time *= 0.001; //ms to s
         kal.time = time;
-        updateArrows();
-
-        //full rotation about once every 6.3s
-        tet.rotation.x = time;
-        tet.rotation.y = time;
-
+        kal.animate();
 
         /*
             Boilerplate
@@ -129,13 +123,6 @@ function draw() {
 
 function onSliderChange(value) {
     tet.position.x = value;
-}
-
-function updateArrows() {
-    kal.updateVectors();
-    u.setDirection(kal.u);
-    v.setDirection(kal.v);
-    w.setDirection(kal.w);
 }
 
 setup();
