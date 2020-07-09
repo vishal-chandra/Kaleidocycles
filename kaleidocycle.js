@@ -16,6 +16,8 @@ export class Kaleidocycle {
         this.n = number; //how many tetrahedra
         this.a = 2 * Math.PI / this.n; //alpha
 
+        this.nAlpha = new Vector3(-Math.sin(this.a), Math.cos(this.a), 0);
+
         //intial vertex position
         this.A = new Vector3(-this.s/2, 0, 0);
         this.B = new Vector3(this.s/2, 0, 0);
@@ -75,16 +77,16 @@ export class Kaleidocycle {
         return this.u
     }
 
-    calculate_v(t) {
-        this.v.set(-Math.sin(t), -Math.sin(t)*Math.tan(this.a), Math.cos(t))
-        this.v.multiplyScalar(1/(Math.sqrt(1 + (Math.sin(t)**2) * (Math.tan(this.a)**2))));
+    calculate_v() {
+        this.v.crossVectors(this.u, this.nAlpha);
+        this.v.normalize();
 
         return this.v;
     }
 
-    calculate_w(t) {
-        this.w.set(-(Math.sin(t)**2)*Math.tan(this.a), 1, Math.cos(t)*Math.sin(t)*Math.tan(this.a))
-        this.w.multiplyScalar(1/(Math.sqrt(1 + (Math.sin(t)**2) * (Math.tan(this.a)**2))));
+    calculate_w() {
+        this.w.crossVectors(this.u, this.v);
+        this.w.multiplyScalar(-1);
 
         return this.w;
     }
@@ -92,8 +94,8 @@ export class Kaleidocycle {
     updateVectors(t) {
         //normed vectors
         this.calculate_u(t);
-        this.calculate_v(t);
-        this.calculate_w(t);
+        this.calculate_v();
+        this.calculate_w();
     }
 
     getRotationMatrix() {
@@ -104,7 +106,7 @@ export class Kaleidocycle {
 
     //no params because it is dependent on time-dependent vectors
     update_M() {
-        this.M.set(this.w.y / Math.tan(this.a) - this.w.x / 2, this.w.y / 2, 0)
+        this.M.set((this.w.y / Math.tan(this.a)) - (this.w.x / 2), this.w.y / 2, 0)
         this.M.multiplyScalar(this.h);
 
         return this.M;
@@ -121,7 +123,7 @@ export class Kaleidocycle {
         this.getRotationMatrix();
         this.update_M();
         this.getTranslationMatrix();
-        this.currentTransform.multiplyMatrices(this.rotMat, this.transMat);
+        this.currentTransform.multiply(this.transMat, this.rotMat);
 
         return this.currentTransform;
     }

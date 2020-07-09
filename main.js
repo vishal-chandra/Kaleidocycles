@@ -45,12 +45,12 @@ function setup() {
     scene.add(new t.AxesHelper(100));
 
     //show norms
-    // u = new t.ArrowHelper(kal.u, new t.Vector3(0,0,0));
-    // scene.add(u)
-    // v = new t.ArrowHelper(kal.v, new t.Vector3(0,0,0));
-    // scene.add(v);
-    // w = new t.ArrowHelper(kal.w, new t.Vector3(0,0,0));
-    // scene.add(w);
+    u = new t.ArrowHelper(kal.u, new t.Vector3(0,0,0));
+    scene.add(u)
+    v = new t.ArrowHelper(kal.v, new t.Vector3(0,0,0));
+    scene.add(v);
+    w = new t.ArrowHelper(kal.w, new t.Vector3(0,0,0));
+    scene.add(w);
 
     //tet
     const material = new t.MeshPhongMaterial({color: 0x44aa88});
@@ -104,6 +104,7 @@ function draw() {
         time *= 0.001; //ms to s
         kal.time = time;
         kal.animate();
+        updateArrows();
 
         /*
             Boilerplate
@@ -123,6 +124,12 @@ function draw() {
 
 function onSliderChange(value) {
     tet.position.x = value;
+}
+
+function updateArrows() {
+    u.setDirection(kal.u);
+    v.setDirection(kal.v);
+    w.setDirection(kal.w);
 }
 
 setup();
