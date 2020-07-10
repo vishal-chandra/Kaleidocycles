@@ -41,33 +41,27 @@ export class Kaleidocycle {
         this.time = 0; //"time" – really the rotation angle
 
         //ROTATION STUFF
-        //--------------------------
 
         //normed vectors
         this.u = new Vector3();
         this.v = new Vector3();
         this.w = new Vector3();
 
-        //rotation matrix
         this.rotMat = new Matrix4();
 
         //TRANSLATION STUFF
-        //---------------------------
 
         //object center (affine offset)
         this.M = new Vector3();
-
-        //translation matrix
         this.transMat = new Matrix4();
 
-        //COMBINED TRANSFORMS
-        //---------------------------
+        //COMBINED TRANSFORMATION
         this.currentTransform = new Matrix4();
+        this.inverseCurrentTransform = new Matrix4();
+
+        //kick off animation
         this.getTransform(this.time);
         this.applyCurrentTransform();
-
-        //inverse of the current transform
-        this.inverseCurrentTransform = new Matrix4();
 
     }
 
@@ -106,7 +100,11 @@ export class Kaleidocycle {
 
     //no params because it is dependent on time-dependent vectors
     update_M() {
-        this.M.set((this.w.y / Math.tan(this.a)) - (this.w.x / 2), this.w.y / 2, 0)
+        this.M.set(
+            (this.w.y / Math.tan(this.a)) - (this.w.x / 2), 
+            this.w.y / 2, 
+            0
+        );
         this.M.multiplyScalar(this.h);
 
         return this.M;
@@ -121,9 +119,11 @@ export class Kaleidocycle {
     getTransform(time) {
         this.updateVectors(time);
         this.getRotationMatrix();
+
         this.update_M();
         this.getTranslationMatrix();
-        this.currentTransform.multiply(this.transMat, this.rotMat);
+
+        this.currentTransform.multiplyMatrices(this.transMat, this.rotMat);
 
         return this.currentTransform;
     }
