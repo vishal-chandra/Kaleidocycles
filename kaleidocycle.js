@@ -24,7 +24,7 @@ export class Kaleidocycle {
         this.C = new Vector3(0, this.h, -this.s/2);
         this.D = new Vector3(0, this.h, this.s/2);
 
-        //geometry
+        //geometry  TODO: Maybe make this and related methods a separate class
         this.principalGeometry = new Geometry();
         this.principalGeometry.vertices.push(
             this.A, this.B, this.C, this.D
@@ -33,6 +33,7 @@ export class Kaleidocycle {
             new Face3(0,3,1), new Face3(0,1,2), 
             new Face3(1,3,2), new Face3(2,3,0)
         );
+        this.principalGeometry.computeFaceNormals();
 
         /*
             MANIPULATIONS
