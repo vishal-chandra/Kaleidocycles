@@ -44,6 +44,11 @@ function setup() {
     //axes
     scene.add(new t.AxesHelper(100));
 
+    //Ea plane
+    let points = [new t.Vector3(-10, -10*Math.tan(kal.a), 0), new t.Vector3(10, 10*Math.tan(kal.a), 0)]
+    let linGeo = new t.BufferGeometry().setFromPoints(points);
+    scene.add(new t.Line(linGeo, new t.LineBasicMaterial({color: 0x000000})));
+
     //show norms
     u = new t.ArrowHelper(kal.u, new t.Vector3(0,0,0));
     scene.add(u)
@@ -63,15 +68,25 @@ function setup() {
      */
     let slider1 = document.getElementById('slider1');
     slider1.addEventListener(
-        'input', function() {onSliderChange(slider1.value)}
+        'input', function() {
+            tet.position.x = slider1.value;
+        }
     );
 
     
     let checkbox1 = document.getElementById('checkbox1');
     checkbox1.addEventListener(
         'change', function() {
-            if(checkbox1.checked) scene.add(tet);
-            else scene.remove(tet);
+            if(checkbox1.checked) {
+                scene.add(u);
+                scene.add(v);
+                scene.add(w);
+            }
+            else {
+                scene.remove(u);
+                scene.remove(v);
+                scene.remove(w);
+            }
         }
     )
     
@@ -120,10 +135,6 @@ function draw() {
 
     requestAnimationFrame(loop); //kick off loop
 
-}
-
-function onSliderChange(value) {
-    tet.position.x = value;
 }
 
 function updateArrows() {
