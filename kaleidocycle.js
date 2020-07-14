@@ -14,9 +14,9 @@ export class Kaleidocycle {
         this.h = size / Math.SQRT2; //legth of PQ
 
         this.n = number; //how many tetrahedra
-        this.a = 2 * Math.PI / this.n; //alpha
+        this.alpha = 2 * Math.PI / this.n; //alpha
 
-        this.nAlpha = new Vector3(-Math.sin(this.a), Math.cos(this.a), 0);
+        this.nAlpha = new Vector3(-Math.sin(this.alpha), Math.cos(this.alpha), 0);
 
         //intial vertex position
         this.A = new Vector3(-this.s/2, 0, 0);
@@ -68,6 +68,7 @@ export class Kaleidocycle {
 
     calculate_u(t) {
         this.u.set(Math.cos(t), 0, Math.sin(t));
+        this.u.normalize();
 
         return this.u
     }
@@ -81,7 +82,8 @@ export class Kaleidocycle {
 
     calculate_w() {
         this.w.crossVectors(this.u, this.v);
-        this.w.multiplyScalar(-1);
+        this.w.negate();
+        this.w.normalize();
 
         return this.w;
     }
@@ -102,7 +104,7 @@ export class Kaleidocycle {
     //no params because it is dependent on time-dependent vectors
     update_M() {
         this.M.set(
-            (this.w.y / Math.tan(this.a)) - (this.w.x / 2), 
+            (this.w.y / Math.tan(this.alpha)) - (this.w.x / 2), 
             this.w.y / 2, 
             0
         );
@@ -125,6 +127,7 @@ export class Kaleidocycle {
         this.getTranslationMatrix();
 
         this.currentTransform.multiplyMatrices(this.transMat, this.rotMat);
+        //this.currentTransform.copy(this.transMat);
 
         return this.currentTransform;
     }

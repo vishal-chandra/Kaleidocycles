@@ -45,7 +45,7 @@ function setup() {
     scene.add(new t.AxesHelper(100));
 
     //Ea plane
-    let points = [new t.Vector3(-10, -10*Math.tan(kal.a), 0), new t.Vector3(10, 10*Math.tan(kal.a), 0)]
+    let points = [new t.Vector3(-10, -10*Math.tan(kal.alpha), 0), new t.Vector3(10, 10*Math.tan(kal.alpha), 0)]
     let linGeo = new t.BufferGeometry().setFromPoints(points);
     scene.add(new t.Line(linGeo, new t.LineBasicMaterial({color: 0x000000})));
 
@@ -58,7 +58,7 @@ function setup() {
     scene.add(w);
 
     //tet
-    const material = new t.MeshPhongMaterial({color: 0x44aa88});
+    const material = new t.MeshBasicMaterial({color: 0x44aa88});
     tet = new t.Mesh(kal.principalGeometry, material);
     scene.add(tet);
 
@@ -89,6 +89,16 @@ function setup() {
             }
         }
     )
+
+
+    //debug
+    let i;
+    for(i = 1; i < 26; i++) {
+        kal.time = i;
+        kal.updateVectors(kal.time);
+        kal.update_M();
+        console.log(kal.w, i);
+    }
     
 }
 
@@ -117,9 +127,9 @@ function draw() {
             Logic and Animation
         */
         time *= 0.001; //ms to s
-        kal.time = time;
-        kal.animate();
-        updateArrows();
+        // kal.time = time;
+        // kal.animate();
+        // updateArrows();
 
         /*
             Boilerplate
