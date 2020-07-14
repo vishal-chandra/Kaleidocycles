@@ -114,7 +114,7 @@ export class Kaleidocycle {
 
     getTranslationMatrix() {
 
-        this.transMat.makeBasis(this.M.x, this.M.y, this.M.z);
+        this.transMat.makeTranslation(this.M.x, this.M.y, this.M.z);
 
         return this.transMat;
     }

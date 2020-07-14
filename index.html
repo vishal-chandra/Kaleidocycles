@@ -8,9 +8,14 @@
 </head>
 <body>
     <canvas id="canvas"></canvas>
-    <input class="slider" id="slider1" type="range" 
-    min="-5" max="5" value="0" step="0.01"/>
-    <input class="checkbox" id="checkbox1" type="checkbox" checked="true"/> 
+
+    <label for="slider1">Move Along X-Axis</label>
+    <input class="slider" id="slider1" type="range" min="-5" max="5" value="0" step="0.01"/>
+    <br>
+    <label for="checkbox1">Show u, v, and w</label>
+    <input class="checkbox" id="checkbox1" type="checkbox" checked="true"/>
+    <br>
+    <label for="logbox">Toggle Matrix Logging</label>
     <input class="checkbox" id="logbox" type="checkbox" checked="true"/>
 </body>
 <script type="module" src="./kaleidocycle.js"></script>

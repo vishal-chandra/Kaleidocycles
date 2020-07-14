@@ -60,7 +60,7 @@ function setup() {
     //tet
     const material = new t.MeshBasicMaterial({color: 0x44aa88});
     tet = new t.Mesh(kal.principalGeometry, material);
-    tet.matrixAutoUpdate = false;
+    //tet.matrixAutoUpdate = false;
     scene.add(tet);
 
     /**
