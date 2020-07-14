@@ -60,6 +60,7 @@ function setup() {
     //tet
     const material = new t.MeshBasicMaterial({color: 0x44aa88});
     tet = new t.Mesh(kal.principalGeometry, material);
+    tet.matrixAutoUpdate = false;
     scene.add(tet);
 
     /**
@@ -89,17 +90,6 @@ function setup() {
             }
         }
     )
-
-
-    //debug
-    let i;
-    for(i = 1; i < 26; i++) {
-        kal.time = i;
-        kal.updateVectors(kal.time);
-        kal.update_M();
-        console.log(kal.w, i);
-    }
-    
 }
 
 /**
@@ -127,9 +117,9 @@ function draw() {
             Logic and Animation
         */
         time *= 0.001; //ms to s
-        // kal.time = time;
-        // kal.animate();
-        // updateArrows();
+        kal.time = time;
+        kal.animate();
+        updateArrows();
 
         /*
             Boilerplate

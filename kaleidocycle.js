@@ -63,7 +63,6 @@ export class Kaleidocycle {
         //kick off animation
         this.getTransform(this.time);
         this.applyCurrentTransform();
-
     }
 
     calculate_u(t) {
@@ -114,7 +113,8 @@ export class Kaleidocycle {
     }
 
     getTranslationMatrix() {
-        this.transMat.makeTranslation(this.M.x, this.M.y, this.M.z);
+
+        this.transMat.makeBasis(this.M.x, this.M.y, this.M.z);
 
         return this.transMat;
     }
@@ -126,8 +126,8 @@ export class Kaleidocycle {
         this.update_M();
         this.getTranslationMatrix();
 
-        this.currentTransform.multiplyMatrices(this.transMat, this.rotMat);
-        //this.currentTransform.copy(this.transMat);
+        //this.currentTransform.multiplyMatrices(this.transMat, this.rotMat);
+        this.currentTransform.copy(this.transMat);
 
         return this.currentTransform;
     }
@@ -140,6 +140,9 @@ export class Kaleidocycle {
     }
 
     applyCurrentTransform() {
+        if(document.getElementById("logbox").checked) {
+            console.log(this.currentTransform.elements, this.time);
+        }
         this.principalGeometry.applyMatrix4(this.currentTransform);
     }
 
