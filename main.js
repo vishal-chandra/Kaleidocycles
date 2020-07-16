@@ -6,6 +6,8 @@ import {Kaleidocycle} from "./kaleidocycle.js"
 let canvas, renderer, camera, controls, scene;
 //objects
 let kal, tet, u, v, w;
+//frame counter
+let frames = 0;
 
 /**
  * Initializes the objects and tools
@@ -123,10 +125,16 @@ function draw() {
         /*
             Logic and Animation
         */
+        frames ++;
         time *= 0.001; //ms to s
         kal.time = time;
         kal.animate();
         updateArrows();
+
+        //60hz / 120 = 0.5hz
+        if(frames % 120 == 0 && document.getElementById('logbox').checked) {
+            console.log(kal.currentTransform, kal.time);
+        }
 
         /*
             Boilerplate

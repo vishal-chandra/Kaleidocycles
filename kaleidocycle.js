@@ -127,7 +127,7 @@ export class Kaleidocycle {
         this.getTranslationMatrix();
 
         this.currentTransform.multiplyMatrices(this.transMat, this.rotMat);
-        //this.currentTransform.copy(this.transMat);
+        //this.currentTransform.copy(this.rotMat);
 
         return this.currentTransform;
     }
@@ -140,9 +140,6 @@ export class Kaleidocycle {
     }
 
     applyCurrentTransform() {
-        if(document.getElementById("logbox").checked) {
-            console.log(this.currentTransform.elements, this.time);
-        }
         this.principalGeometry.applyMatrix4(this.currentTransform);
     }
 
