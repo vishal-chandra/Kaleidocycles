@@ -67,10 +67,17 @@ function setup() {
      * EVENT LISTENERS
      * -------------------------
      */
-    let slider1 = document.getElementById('slider1');
-    slider1.addEventListener(
+    let sliderx = document.getElementById('sliderx');
+    sliderx.addEventListener(
         'input', function() {
-            tet.position.x = slider1.value;
+            tet.position.x = sliderx.value;
+        }
+    );
+
+    let slidery = document.getElementById('slidery');
+    slidery.addEventListener(
+        'input', function() {
+            tet.position.y = slidery.value;
         }
     );
 

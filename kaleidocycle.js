@@ -126,8 +126,8 @@ export class Kaleidocycle {
         this.update_M();
         this.getTranslationMatrix();
 
-        //this.currentTransform.multiplyMatrices(this.transMat, this.rotMat);
-        this.currentTransform.copy(this.transMat);
+        this.currentTransform.multiplyMatrices(this.transMat, this.rotMat);
+        //this.currentTransform.copy(this.transMat);
 
         return this.currentTransform;
     }
