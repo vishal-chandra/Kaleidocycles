@@ -5,7 +5,7 @@ import {Kaleidocycle} from "./kaleidocycle.js"
 //tools
 let canvas, renderer, camera, controls, scene;
 //objects
-let kal, tet, u, v, w;
+let kal, tet, u, v, w, nAlpha;
 //frame counter
 let frames = 0;
 
@@ -52,12 +52,14 @@ function setup() {
     scene.add(new t.Line(linGeo, new t.LineBasicMaterial({color: 0x000000})));
 
     //show norms
-    u = new t.ArrowHelper(kal.u, new t.Vector3(0,0,0));
+    u = new t.ArrowHelper(kal.u, new t.Vector3(0,0,0), 1, 0xff00ff);
     scene.add(u)
-    v = new t.ArrowHelper(kal.v, new t.Vector3(0,0,0));
+    v = new t.ArrowHelper(kal.v, new t.Vector3(0,0,0), 1, 0xff00ff);
     scene.add(v);
-    w = new t.ArrowHelper(kal.w, new t.Vector3(0,0,0));
+    w = new t.ArrowHelper(kal.w, new t.Vector3(0,0,0), 1, 0xff00ff);
     scene.add(w);
+    nAlpha = new t.ArrowHelper(kal.nAlpha, new t.Vector3(0,0,0), 1, 0x000000);
+    scene.add(nAlpha);
 
     //tet
     const material = new t.MeshBasicMaterial({color: 0x44aa88});
@@ -91,11 +93,13 @@ function setup() {
                 scene.add(u);
                 scene.add(v);
                 scene.add(w);
+                scene.add(nAlpha);
             }
             else {
                 scene.remove(u);
                 scene.remove(v);
                 scene.remove(w);
+                scene.remove(nAlpha);
             }
         }
     )
@@ -131,9 +135,13 @@ function draw() {
         kal.animate();
         updateArrows();
 
-        //60hz / 120 = 0.5hz
+        //Every 120 frames; every two seconds @60hz
         if(frames % 120 == 0 && document.getElementById('logbox').checked) {
-            console.log(kal.currentTransform, kal.time);
+            console.log(
+                JSON.parse(JSON.stringify(tet.matrix)),
+                JSON.parse(JSON.stringify("")),
+                kal.time
+            );
         }
 
         /*

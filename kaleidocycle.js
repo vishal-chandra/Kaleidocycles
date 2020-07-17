@@ -56,7 +56,7 @@ export class Kaleidocycle {
         this.M = new Vector3();
         this.transMat = new Matrix4();
 
-        //COMBINED TRANSFORMATION
+        //COMBINED TRANSFORMATION – TODO: Get rid of individual matrices
         this.currentTransform = new Matrix4();
         this.inverseCurrentTransform = new Matrix4();
 
@@ -69,7 +69,7 @@ export class Kaleidocycle {
         this.u.set(Math.cos(t), 0, Math.sin(t));
         this.u.normalize();
 
-        return this.u
+        return this.u;
     }
 
     calculate_v() {
@@ -126,9 +126,14 @@ export class Kaleidocycle {
         this.update_M();
         this.getTranslationMatrix();
 
-        this.currentTransform.multiplyMatrices(this.transMat, this.rotMat);
+        //this.currentTransform.multiplyMatrices(this.transMat, this.rotMat);
         //this.currentTransform.copy(this.rotMat);
-
+        this.currentTransform.set(
+            this.u.x, this.w.x, this.v.x, this.M.x,
+            this.u.y, this.w.y, this.v.y, this.M.y,
+            this.u.z, this.w.z, this.v.z, this.M.z,
+            0,        0,        0,        1
+        );
         return this.currentTransform;
     }
 
