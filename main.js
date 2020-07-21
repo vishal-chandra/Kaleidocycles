@@ -68,19 +68,19 @@ function setup() {
      * EVENT LISTENERS
      * -------------------------
      */
-    let sliderx = document.getElementById('sliderx');
-    sliderx.addEventListener(
-        'input', function() {
-            //tet.position.x = sliderx.value;
-        }
-    );
+    // let sliderx = document.getElementById('sliderx');
+    // sliderx.addEventListener(
+    //     'input', function() {
+    //         kal.tet.matrix.setPosition(sliderx.value, 0, 0);
+    //     }
+    // );
 
-    let slidery = document.getElementById('slidery');
-    slidery.addEventListener(
-        'input', function() {
-            //tet.position.y = slidery.value;
-        }
-    );
+    // let slidery = document.getElementById('slidery');
+    // slidery.addEventListener(
+    //     'input', function() {
+    //         kal.tet.matrix.setPosition(0, slidery.value, 0);
+    //     }
+    // );
 
     
     let checkbox1 = document.getElementById('checkbox1');

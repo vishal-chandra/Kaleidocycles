@@ -24,7 +24,7 @@ export class Kaleidocycle {
         this.C = new Vector3(0, this.h, -this.s/2);
         this.D = new Vector3(0, this.h, this.s/2);
 
-        //geometry  TODO: Maybe make this and related methods a separate class
+        //geometry
         this.principalGeometry = new Geometry();
         this.principalGeometry.vertices.push(
             this.A, this.B, this.C, this.D
@@ -46,28 +46,16 @@ export class Kaleidocycle {
 
         this.time = 0; //"time" – really the rotation angle
 
-        //ROTATION STUFF
-
         //normed vectors
         this.u = new Vector3();
         this.v = new Vector3();
         this.w = new Vector3();
 
-        this.rotMat = new Matrix4();
-
-        //TRANSLATION STUFF
-
         //object center (affine offset)
         this.M = new Vector3();
-        this.transMat = new Matrix4();
-
-        //COMBINED TRANSFORMATION – TODO: Get rid of individual matrices
-        this.currentTransform = new Matrix4();
-        this.inverseCurrentTransform = new Matrix4();
 
         //kick off animation
-        this.getTransform(this.time);
-        this.applyCurrentTransform();
+        this.transform(this.time);
     }
 
     calculate_u(t) {
@@ -99,12 +87,6 @@ export class Kaleidocycle {
         this.calculate_w();
     }
 
-    getRotationMatrix() {
-        this.rotMat.makeBasis(this.u, this.w, this.v);
-
-        return this.rotMat;
-    }
-
     //no params because it is dependent on time-dependent vectors
     update_M() {
         this.M.set(
@@ -117,46 +99,20 @@ export class Kaleidocycle {
         return this.M;
     }
 
-    getTranslationMatrix() {
-
-        this.transMat.makeTranslation(this.M.x, this.M.y, this.M.z);
-
-        return this.transMat;
-    }
-
-    getTransform(time) {
+    transform(time) {
         this.updateVectors(time);
-        this.getRotationMatrix();
-
         this.update_M();
-        this.getTranslationMatrix();
 
-        //this.currentTransform.multiplyMatrices(this.transMat, this.rotMat);
-        //this.currentTransform.copy(this.rotMat);
         this.tet.matrix.set(
             this.u.x, this.w.x, this.v.x, this.M.x,
             this.u.y, this.w.y, this.v.y, this.M.y,
             this.u.z, this.w.z, this.v.z, this.M.z,
             0,        0,        0,        1
         );
-        return this.currentTransform;
-    }
-
-    undoCurrentTransform() {
-        //calculate and apply the inverse of the current transform
-        //gets us back to original position without having to keep and constantly copy original geometry
-        this.inverseCurrentTransform.getInverse(this.currentTransform);
-        this.principalGeometry.applyMatrix4(this.inverseCurrentTransform);
-    }
-
-    applyCurrentTransform() {
-        this.principalGeometry.applyMatrix4(this.currentTransform);
     }
 
     animate() {
-        //start by undoing because constructor ends by applying
-        this.undoCurrentTransform();
-        this.getTransform(this.time);
-        this.applyCurrentTransform();
+        this.tet.matrix.identity();
+        this.transform(this.time);
     }
 }
