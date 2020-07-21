@@ -99,8 +99,8 @@ export class Kaleidocycle {
         return this.M;
     }
 
-    transform(time) {
-        this.updateVectors(time);
+    transform() {
+        this.updateVectors(this.time);
         this.update_M();
 
         this.tet.matrix.set(
@@ -109,10 +109,5 @@ export class Kaleidocycle {
             this.u.z, this.w.z, this.v.z, this.M.z,
             0,        0,        0,        1
         );
-    }
-
-    animate() {
-        this.tet.matrix.identity();
-        this.transform(this.time);
     }
 }

@@ -129,7 +129,7 @@ function draw() {
         frames ++;
         time *= 0.001; //ms to s
         kal.time = time;
-        kal.animate();
+        kal.transform();
         updateArrows();
 
         //Every 120 frames; every two seconds @60hz
