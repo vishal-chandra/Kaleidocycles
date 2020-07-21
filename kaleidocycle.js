@@ -2,7 +2,7 @@
  * A class to encapsulate the data of the kaleidocycle itself
  */
 
-import {Vector3, Geometry, Face3, Matrix4} from "./lib/three.js-r115/build/three.module.js";
+import {Vector3, Geometry, Face3, Matrix4, MeshBasicMaterial, Mesh} from "./lib/three.js-r115/build/three.module.js";
 
 export class Kaleidocycle {
 
@@ -34,6 +34,11 @@ export class Kaleidocycle {
             new Face3(1,3,2), new Face3(2,3,0)
         );
         this.principalGeometry.computeFaceNormals();
+
+        //main tetrahedron
+        const material = new MeshBasicMaterial({color: 0x44aa88});
+        this.tet = new Mesh(this.principalGeometry, material);
+        this.tet.matrixAutoUpdate = false;
 
         /*
             MANIPULATIONS
@@ -128,7 +133,7 @@ export class Kaleidocycle {
 
         //this.currentTransform.multiplyMatrices(this.transMat, this.rotMat);
         //this.currentTransform.copy(this.rotMat);
-        this.currentTransform.set(
+        this.tet.matrix.set(
             this.u.x, this.w.x, this.v.x, this.M.x,
             this.u.y, this.w.y, this.v.y, this.M.y,
             this.u.z, this.w.z, this.v.z, this.M.z,

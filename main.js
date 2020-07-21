@@ -14,8 +14,6 @@ let frames = 0;
  */
 function setup() {
 
-    kal = new Kaleidocycle(1, 8);
-
     /*
      * RENDERING BOILERPLATE
      * -----------------------
@@ -34,9 +32,13 @@ function setup() {
      * -------------------
      */
 
-    //bg
+    //scene and bg
     scene = new t.Scene();
     scene.background = new t.Color('white');
+
+    //main geometry
+    kal = new Kaleidocycle(1, 8);
+    scene.add(kal.tet);
 
     //light
     const light = new t.DirectionalLight(0xFFFFFF, 1.0);
@@ -60,12 +62,7 @@ function setup() {
     scene.add(w);
     nAlpha = new t.ArrowHelper(kal.nAlpha, new t.Vector3(0,0,0), 1, 0x000000);
     scene.add(nAlpha);
-
-    //tet
-    const material = new t.MeshBasicMaterial({color: 0x44aa88});
-    tet = new t.Mesh(kal.principalGeometry, material);
-    //tet.matrixAutoUpdate = false;
-    scene.add(tet);
+    
 
     /**
      * EVENT LISTENERS
@@ -74,14 +71,14 @@ function setup() {
     let sliderx = document.getElementById('sliderx');
     sliderx.addEventListener(
         'input', function() {
-            tet.position.x = sliderx.value;
+            //tet.position.x = sliderx.value;
         }
     );
 
     let slidery = document.getElementById('slidery');
     slidery.addEventListener(
         'input', function() {
-            tet.position.y = slidery.value;
+            //tet.position.y = slidery.value;
         }
     );
 
@@ -138,7 +135,7 @@ function draw() {
         //Every 120 frames; every two seconds @60hz
         if(frames % 120 == 0 && document.getElementById('logbox').checked) {
             console.log(
-                JSON.parse(JSON.stringify(tet.matrix)),
+                JSON.parse(JSON.stringify(kal.tet.matrix)),
                 JSON.parse(JSON.stringify("")),
                 kal.time
             );
