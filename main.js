@@ -2,12 +2,9 @@ import * as t from "./lib/three.js-r115/build/three.module.js";
 import {OrbitControls} from "./lib/three.js-r115/examples/jsm/controls/OrbitControls.js";
 import {Kaleidocycle} from "./kaleidocycle.js"
 
-//tools
-let canvas, renderer, camera, controls, scene;
-//objects
-let kal, tet, u, v, w, nAlpha;
-//frame counter
-let frames = 0;
+let canvas, renderer, camera, controls, scene; //render tools
+let kal, u, v, w, nAlpha, eAlpha; //objects
+let frames = 0; //frame counter
 
 /**
  * Initializes the objects and tools
@@ -51,38 +48,22 @@ function setup() {
     //Ea plane
     let points = [new t.Vector3(-10, -10*Math.tan(kal.alpha), 0), new t.Vector3(10, 10*Math.tan(kal.alpha), 0)]
     let linGeo = new t.BufferGeometry().setFromPoints(points);
-    scene.add(new t.Line(linGeo, new t.LineBasicMaterial({color: 0x000000})));
+    eAlpha = new t.Line(linGeo, new t.LineBasicMaterial({color: 0x000000}));
+    scene.add(eAlpha);
 
     //show norms
     u = new t.ArrowHelper(kal.u, new t.Vector3(0,0,0), 1, 0xff00ff);
     scene.add(u)
+
     v = new t.ArrowHelper(kal.v, new t.Vector3(0,0,0), 1, 0xff00ff);
     scene.add(v);
+
     w = new t.ArrowHelper(kal.w, new t.Vector3(0,0,0), 1, 0xff00ff);
     scene.add(w);
+
     nAlpha = new t.ArrowHelper(kal.nAlpha, new t.Vector3(0,0,0), 1, 0x000000);
     scene.add(nAlpha);
-    
 
-    /**
-     * EVENT LISTENERS
-     * -------------------------
-     */
-    // let sliderx = document.getElementById('sliderx');
-    // sliderx.addEventListener(
-    //     'input', function() {
-    //         kal.tet.matrix.setPosition(sliderx.value, 0, 0);
-    //     }
-    // );
-
-    // let slidery = document.getElementById('slidery');
-    // slidery.addEventListener(
-    //     'input', function() {
-    //         kal.tet.matrix.setPosition(0, slidery.value, 0);
-    //     }
-    // );
-
-    
     let checkbox1 = document.getElementById('checkbox1');
     checkbox1.addEventListener(
         'change', function() {
@@ -91,6 +72,7 @@ function setup() {
             v.visible = show;
             w.visible = show;
             nAlpha.visible = show;
+            eAlpha.visible = show;
         }
     )
 }
@@ -128,7 +110,7 @@ function draw() {
         //Every 120 frames; every two seconds @60hz
         if(frames % 120 == 0 && document.getElementById('logbox').checked) {
             console.log(
-                JSON.parse(JSON.stringify(kal.tet.position)),
+                JSON.parse(JSON.stringify(kal.tet.position)), //put obj here to debug
                 kal.time
             );
         }

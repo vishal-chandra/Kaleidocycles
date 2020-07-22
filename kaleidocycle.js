@@ -2,7 +2,7 @@
  * A class to encapsulate the data of the kaleidocycle itself
  */
 
-import {Vector3, Geometry, Face3, Matrix4, MeshPhongMaterial, Mesh} from "./lib/three.js-r115/build/three.module.js";
+import {Vector3, Geometry, Face3, MeshPhongMaterial, Mesh} from "./lib/three.js-r115/build/three.module.js";
 
 export class Kaleidocycle {
 
@@ -12,13 +12,11 @@ export class Kaleidocycle {
         */
         this.s = size; //side length
         this.h = size / Math.SQRT2; //legth of PQ
-
-        this.n = number; //how many tetrahedra
-        this.alpha = 2 * Math.PI / this.n; //alpha
-
+        this.n = number;
+        this.alpha = 2 * Math.PI / this.n;
         this.nAlpha = new Vector3(-Math.sin(this.alpha), Math.cos(this.alpha), 0);
 
-        //intial vertex position
+        //intial vertex positions
         this.A = new Vector3(-this.s/2, -this.h/2, 0);
         this.B = new Vector3(this.s/2, -this.h/2, 0);
         this.C = new Vector3(0, this.h/2, -this.s/2);
@@ -33,29 +31,28 @@ export class Kaleidocycle {
             new Face3(0,3,1), new Face3(0,1,2), 
             new Face3(1,3,2), new Face3(2,3,0)
         );
+
+        //enables lighting
         this.principalGeometry.computeFaceNormals();
 
-        //main tetrahedron
+        //main mesh
         const material = new MeshPhongMaterial({color: 0x44aa88});
         this.tet = new Mesh(this.principalGeometry, material);
-        this.tet.matrixAutoUpdate = false;
+        this.tet.matrixAutoUpdate = false; //since we manually update every frame
 
         /*
             MANIPULATIONS
         */
 
-        this.time = 0; //"time" – really the rotation angle
+        this.time = 0; //really the rotation angle
 
-        //normed vectors
+        //basis vectors
         this.u = new Vector3();
         this.v = new Vector3();
         this.w = new Vector3();
 
         //object center (affine offset)
         this.M = new Vector3();
-
-        //kick off animation
-        this.transform(this.time);
     }
 
     calculate_u(t) {
