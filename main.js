@@ -86,18 +86,11 @@ function setup() {
     let checkbox1 = document.getElementById('checkbox1');
     checkbox1.addEventListener(
         'change', function() {
-            if(checkbox1.checked) {
-                scene.add(u);
-                scene.add(v);
-                scene.add(w);
-                scene.add(nAlpha);
-            }
-            else {
-                scene.remove(u);
-                scene.remove(v);
-                scene.remove(w);
-                scene.remove(nAlpha);
-            }
+            let show = checkbox1.checked;
+            u.visible = show;
+            v.visible = show;
+            w.visible = show;
+            nAlpha.visible = show;
         }
     )
 }
@@ -126,7 +119,7 @@ function draw() {
         /*
             Logic and Animation
         */
-        frames ++;
+        frames++;
         time *= 0.001; //ms to s
         kal.time = time;
         kal.transform();
@@ -135,8 +128,7 @@ function draw() {
         //Every 120 frames; every two seconds @60hz
         if(frames % 120 == 0 && document.getElementById('logbox').checked) {
             console.log(
-                JSON.parse(JSON.stringify(kal.tet.matrix)),
-                JSON.parse(JSON.stringify("")),
+                JSON.parse(JSON.stringify(kal.tet.position)),
                 kal.time
             );
         }
