@@ -37,10 +37,14 @@ function setup() {
     kal = new Kaleidocycle(1, 8);
     kal.tets.forEach(tet => scene.add(tet)); 
 
-    //light
-    const light = new t.DirectionalLight(0xFFFFFF, 1.0);
-    light.position.set(-1, 2, 4);
-    scene.add(light);
+    //lights
+    const frontLight = new t.DirectionalLight(0xFFFFFF, 1.0);
+    frontLight.position.set(0, 2, 4);
+    scene.add(frontLight);
+
+    const backLight = new t.DirectionalLight(0xFFFFFF, 1.0);
+    backLight.position.set(0, 2, -4);
+    scene.add(backLight);
 
     //axes
     scene.add(new t.AxesHelper(100));
