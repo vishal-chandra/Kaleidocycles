@@ -46,9 +46,12 @@ export class Kaleidocycle {
         const material = new MeshPhongMaterial({color: 0x44aa88});
 
         //mesh array
-        this.tets = [];
-        this.tets.push(new Mesh(this.baseGeometry, material));
-        this.tets.push(new Mesh(this.baseGeometry, material));
+        this.tets = [
+            new Mesh(this.baseGeometry, material),
+            new Mesh(this.baseGeometry, material),
+            new Mesh(this.baseGeometry, material),
+            new Mesh(this.baseGeometry, material)
+        ];
 
         this.tets.forEach(
             mesh => mesh.matrixAutoUpdate = false
@@ -61,6 +64,9 @@ export class Kaleidocycle {
         reflection and z-rotations take place
         */
         this.tets[1].matrix.multiply(this.refMat);
+        this.tets[2].matrix.multiply(new Matrix4().makeRotationZ(2 * this.alpha));
+        this.tets[3].matrix.multiply(this.refMat)
+                           .multiply(new Matrix4().makeRotationZ(-2 * this.alpha));
 
         /*
             MANIPULATIONS
