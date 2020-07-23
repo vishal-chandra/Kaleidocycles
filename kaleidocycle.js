@@ -63,11 +63,28 @@ export class Kaleidocycle {
         this means that the translation is also taken into account when
         reflection and z-rotations take place
         */
-        this.tets[1].matrix.multiply(this.refMat);
-        this.tets[2].matrix.multiply(new Matrix4().makeRotationZ(2 * this.alpha));
-        this.tets[3].matrix.multiply(this.refMat)
-                           .multiply(new Matrix4().makeRotationZ(-2 * this.alpha));
+        for(let i = 1; i < this.tets.length; i++) {
+            let mat = this.tets[i].matrix;
 
+            if(i == 1) mat.multiply(this.refMat);
+            else if (i % 2 == 0) {
+                 mat.multiply(new Matrix4().makeRotationZ(
+                     //first time this is called i = 2
+                     //we need to rotate by 2a one less time than i
+                     (i-1) * 2 * this.alpha
+                 ));
+            }
+            else if (i % 2 == 1) {
+                //first rotate so this becomes identitcal to tets[1]
+                mat.multiply(this.refMat);
+                mat.multiply(new Matrix4().makeRotationZ(
+                    //first time this is called i = 3
+                    //we need to rotate by -2a two less times than i
+                    (i-2) * -2 * this.alpha
+                ));
+            }
+        }
+        
         /*
             MANIPULATIONS
         */
