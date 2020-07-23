@@ -43,12 +43,15 @@ export class Kaleidocycle {
         //enables lighting
         this.baseGeometry.computeFaceNormals();
 
-        const material = new MeshPhongMaterial({color: 0x44aa88});
+        const colors = [0xFF0000, 0x6FFF00, 0x00E1FF, 0xFFA600, 0xD400FF]
 
         //mesh array
         this.tets = []
         for(let i = 0; i < this.n; i++) {
-            this.tets.push(new Mesh(this.baseGeometry, material));
+            this.tets.push(new Mesh(
+                this.baseGeometry, 
+                new MeshPhongMaterial({color: colors[i % colors.length]})
+            ));
         }
 
         this.tets.forEach(
