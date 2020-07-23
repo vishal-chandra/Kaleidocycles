@@ -46,12 +46,10 @@ export class Kaleidocycle {
         const material = new MeshPhongMaterial({color: 0x44aa88});
 
         //mesh array
-        this.tets = [
-            new Mesh(this.baseGeometry, material),
-            new Mesh(this.baseGeometry, material),
-            new Mesh(this.baseGeometry, material),
-            new Mesh(this.baseGeometry, material)
-        ];
+        this.tets = []
+        for(let i = 0; i < this.n; i++) {
+            this.tets.push(new Mesh(this.baseGeometry, material));
+        }
 
         this.tets.forEach(
             mesh => mesh.matrixAutoUpdate = false
@@ -69,22 +67,25 @@ export class Kaleidocycle {
             if(i == 1) mat.multiply(this.refMat);
             else if (i % 2 == 0) {
                  mat.multiply(new Matrix4().makeRotationZ(
-                     //first time this is called i = 2
-                     //we need to rotate by 2a one less time than i
-                     (i-1) * 2 * this.alpha
+                     //i=2 --> 2a
+                     //i=4 --> 4a
+                     //i=6 --> 6a
+                     i * this.alpha
                  ));
             }
             else if (i % 2 == 1) {
                 //first rotate so this becomes identitcal to tets[1]
                 mat.multiply(this.refMat);
                 mat.multiply(new Matrix4().makeRotationZ(
-                    //first time this is called i = 3
-                    //we need to rotate by -2a two less times than i
-                    (i-2) * -2 * this.alpha
+                    //i=3 --> -2a
+                    //i=5 --> -4a
+                    //i=7 --> -6a
+                    //i --> -(i-1)a
+                    -(i-1) * this.alpha
                 ));
             }
         }
-        
+
         /*
             MANIPULATIONS
         */
