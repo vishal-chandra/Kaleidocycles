@@ -35,8 +35,7 @@ function setup() {
 
     //main geometry
     kal = new Kaleidocycle(1, 8);
-    scene.add(kal.tets[1]);
-    //kal.tets.forEach(tet => scene.add(tet)); 
+    kal.tets.forEach(tet => scene.add(tet)); 
 
     //light
     const light = new t.DirectionalLight(0xFFFFFF, 1.0);
