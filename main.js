@@ -110,10 +110,10 @@ function draw() {
 
         //Every 120 frames; every two seconds @60hz
         if(frames % 120 == 0 && document.getElementById('logbox').checked) {
-            console.log(
-                JSON.parse(JSON.stringify(kal.tets[0].geometry.vertices)), //put obj here to debug
-                kal.time
-            );
+            // console.log(
+            //     JSON.parse(JSON.stringify(kal.tets[0].geometry.vertices)), //put obj here to debug
+            //     kal.time
+            // );
         }
 
         /*

@@ -54,6 +54,14 @@ export class Kaleidocycle {
             mesh => mesh.matrixAutoUpdate = false
         ); //since we manually update every frame
 
+        //n-specific transforms
+        /* 
+        object mat instead of geometry mat because it doesn't affect vertices
+        this means that the translation is also taken into account when
+        reflection and z-rotations take place
+        */
+        this.tets[1].matrix.multiply(this.refMat);
+
         /*
             MANIPULATIONS
         */
@@ -131,16 +139,6 @@ export class Kaleidocycle {
                 0,        0,        0,        1
             );
             tet.geometry.applyMatrix4(this.transMat);
-
-            //n-specific transforms
-            /* 
-            object mat instead of geometry mat because it doesn't affect vertices
-            this means that the translation is also taken into account when
-            reflection and z-rotations take place
-            */
-            if(i == 1) {
-                tet.matrix.multiply(this.refMat);
-            }
         }
     }
 }
