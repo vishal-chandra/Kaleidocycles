@@ -32,24 +32,23 @@ export class Kaleidocycle {
         this.D = new Vector3(0, this.h/2, this.s/2);
 
         //geometry
-        this.principalGeometry = new Geometry();
-        this.principalGeometry.vertices.push(
+        this.baseGeometry = new Geometry();
+        this.baseGeometry.vertices.push(
             this.A, this.B, this.C, this.D
         );
-        this.principalGeometry.faces.push(
+        this.baseGeometry.faces.push(
             new Face3(0,3,1), new Face3(0,1,2), 
             new Face3(1,3,2), new Face3(2,3,0)
         );
-
         //enables lighting
-        this.principalGeometry.computeFaceNormals();
+        this.baseGeometry.computeFaceNormals();
 
-        //main mesh
         const material = new MeshPhongMaterial({color: 0x44aa88});
 
+        //mesh array
         this.tets = [];
-        this.tets.push(new Mesh(this.principalGeometry, material));
-        this.tets.push(new Mesh(this.principalGeometry, material));
+        this.tets.push(new Mesh(this.baseGeometry, material));
+        this.tets.push(new Mesh(this.baseGeometry, material));
 
         this.tets.forEach(
             mesh => mesh.matrixAutoUpdate = false
@@ -68,6 +67,9 @@ export class Kaleidocycle {
 
         //object center (affine offset)
         this.M = new Vector3();
+
+        //transfrom matrix so we don't have to keep creating new ones
+        this.transMat = new Matrix4();
     }
 
     calculate_u(t) {
@@ -118,13 +120,24 @@ export class Kaleidocycle {
         for(let i = 0; i < 2; i++) {
             let tet = this.tets[i];
 
-            tet.matrix.set(
+            //undo last transform
+            tet.geometry.applyMatrix4(new Matrix4().getInverse(this.transMat));
+
+            //calc new
+            this.transMat.set(
                 this.u.x, this.w.x, this.v.x, this.M.x,
                 this.u.y, this.w.y, this.v.y, this.M.y,
                 this.u.z, this.w.z, this.v.z, this.M.z,
                 0,        0,        0,        1
             );
+            tet.geometry.applyMatrix4(this.transMat);
 
+            //n-specific transforms
+            /* 
+            object mat instead of geometry mat because it doesn't affect vertices
+            this means that the translation is also taken into account when
+            reflection and z-rotations take place
+            */
             if(i == 1) {
                 tet.matrix.multiply(this.refMat);
             }
