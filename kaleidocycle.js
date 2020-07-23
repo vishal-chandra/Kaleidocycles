@@ -16,6 +16,15 @@ export class Kaleidocycle {
         this.alpha = 2 * Math.PI / this.n;
         this.nAlpha = new Vector3(-Math.sin(this.alpha), Math.cos(this.alpha), 0);
 
+        //matrix to reflect across y=xtan(alpha)
+        this.refMat = new Matrix4().set(
+            1 - 2*(Math.sin(this.alpha)**2), 2*Math.sin(this.alpha)*Math.cos(this.alpha), 0, 0,
+            2*Math.sin(this.alpha)*Math.cos(this.alpha), 1 - 2*(Math.cos(this.alpha)**2), 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
+        );
+
+
         //intial vertex positions
         this.A = new Vector3(-this.s/2, -this.h/2, 0);
         this.B = new Vector3(this.s/2, -this.h/2, 0);
@@ -110,11 +119,15 @@ export class Kaleidocycle {
             let tet = this.tets[i];
 
             tet.matrix.set(
-                this.u.x, this.w.x, this.v.x, this.M.x + i,
+                this.u.x, this.w.x, this.v.x, this.M.x,
                 this.u.y, this.w.y, this.v.y, this.M.y,
                 this.u.z, this.w.z, this.v.z, this.M.z,
                 0,        0,        0,        1
             );
+
+            if(i == 1) {
+                tet.matrix.multiply(this.refMat);
+            }
         }
     }
 }
