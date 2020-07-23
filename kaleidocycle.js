@@ -2,7 +2,7 @@
  * A class to encapsulate the data of the kaleidocycle itself
  */
 
-import {Vector3, Geometry, Face3, MeshPhongMaterial, Mesh} from "./lib/three.js-r115/build/three.module.js";
+import {Vector3, Geometry, Face3, MeshPhongMaterial, Mesh, Matrix4} from "./lib/three.js-r115/build/three.module.js";
 
 export class Kaleidocycle {
 
@@ -37,8 +37,14 @@ export class Kaleidocycle {
 
         //main mesh
         const material = new MeshPhongMaterial({color: 0x44aa88});
-        this.tet = new Mesh(this.principalGeometry, material);
-        this.tet.matrixAutoUpdate = false; //since we manually update every frame
+
+        this.tets = [];
+        this.tets.push(new Mesh(this.principalGeometry, material));
+        this.tets.push(new Mesh(this.principalGeometry, material));
+
+        this.tets.forEach(
+            mesh => mesh.matrixAutoUpdate = false
+        ); //since we manually update every frame
 
         /*
             MANIPULATIONS
@@ -100,11 +106,15 @@ export class Kaleidocycle {
         this.updateVectors(this.time);
         this.update_M();
 
-        this.tet.matrix.set(
-            this.u.x, this.w.x, this.v.x, this.M.x,
-            this.u.y, this.w.y, this.v.y, this.M.y,
-            this.u.z, this.w.z, this.v.z, this.M.z,
-            0,        0,        0,        1
-        );
+        for(let i = 0; i < 2; i++) {
+            let tet = this.tets[i];
+
+            tet.matrix.set(
+                this.u.x, this.w.x, this.v.x, this.M.x + i,
+                this.u.y, this.w.y, this.v.y, this.M.y,
+                this.u.z, this.w.z, this.v.z, this.M.z,
+                0,        0,        0,        1
+            );
+        }
     }
 }
