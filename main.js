@@ -6,6 +6,9 @@ let canvas, renderer, camera, controls, scene; //render tools
 let kal, u, v, w, nAlpha, eAlpha; //objects
 let frames = 0; //frame counter
 
+setup();
+draw();
+
 /**
  * Initializes the objects and tools
  */
@@ -67,6 +70,20 @@ function setup() {
 
     nAlpha = new t.ArrowHelper(kal.nAlpha, new t.Vector3(0,0,0), 1, 0x000000);
     scene.add(nAlpha);
+
+
+    //EVENT LISTENERS
+    let nSlider = document.getElementById('nSlider');
+    nSlider.addEventListener(
+        'change', function() {
+            document.getElementById('nLabel').innerHTML = 'N=' + nSlider.value;
+            
+            kal.destroy(scene);
+            kal = new Kaleidocycle(1, nSlider.value);
+            kal.tets.forEach(tet => scene.add(tet)); 
+        }
+    );
+
 
     let checkbox1 = document.getElementById('checkbox1');
     checkbox1.addEventListener(
@@ -140,6 +157,3 @@ function updateArrows() {
     v.setDirection(kal.v);
     w.setDirection(kal.w);
 }
-
-setup();
-draw();

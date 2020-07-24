@@ -43,14 +43,14 @@ export class Kaleidocycle {
         //enables lighting
         this.baseGeometry.computeFaceNormals();
 
-        const colors = [0xFF0000, 0x6FFF00, 0x00E1FF, 0xFFA600, 0xD400FF]
+        this.colors = [0xFF0000, 0x6FFF00, 0x00E1FF, 0xFFA600, 0xD400FF]
 
         //mesh array
         this.tets = []
         for(let i = 0; i < this.n; i++) {
             this.tets.push(new Mesh(
                 this.baseGeometry, 
-                new MeshPhongMaterial({color: colors[i % colors.length]})
+                new MeshPhongMaterial({color: this.colors[i % this.colors.length]})
             ));
         }
 
@@ -58,7 +58,7 @@ export class Kaleidocycle {
             mesh => mesh.matrixAutoUpdate = false
         ); //since we manually update every frame
 
-        //n-specific transforms
+        //n-specific transforms: the relationship between each Tn and T0
         /* 
         object mat instead of geometry mat because it doesn't affect vertices
         this means that the translation is also taken into account when
@@ -167,5 +167,15 @@ export class Kaleidocycle {
             );
             tet.geometry.applyMatrix4(this.transMat);
         }
+    }
+
+    destroy(scene) {
+        this.baseGeometry.dispose();
+        this.tets.forEach(
+            tet => {
+                scene.remove(tet);
+                tet.material.dispose(); 
+            }
+        );
     }
 }
