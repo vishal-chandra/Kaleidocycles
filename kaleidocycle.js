@@ -2,7 +2,7 @@
  * A class to encapsulate the data of the kaleidocycle itself
  */
 
-import {Vector3, Geometry, Face3, MeshPhongMaterial, Mesh, Matrix4} from "./lib/three.js-r115/build/three.module.js";
+import {Vector3, Geometry, Face3, Mesh, Matrix4, MeshLambertMaterial, MeshNormalMaterial} from "./lib/three.js-r115/build/three.module.js";
 
 export class Kaleidocycle {
 
@@ -50,7 +50,7 @@ export class Kaleidocycle {
         for(let i = 0; i < this.n; i++) {
             this.tets.push(new Mesh(
                 this.baseGeometry, 
-                new MeshPhongMaterial({color: this.colors[i % this.colors.length]})
+                new MeshLambertMaterial({color: this.colors[i % this.colors.length]})
             ));
         }
 

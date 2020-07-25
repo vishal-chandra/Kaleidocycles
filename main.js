@@ -41,12 +41,12 @@ function setup() {
     kal.tets.forEach(tet => scene.add(tet)); 
 
     //lights
-    const frontLight = new t.DirectionalLight(0xFFFFFF, 1.0);
-    frontLight.position.set(0, 2, 4);
+    const frontLight = new t.SpotLight(0xFFFFFF);
+    frontLight.position.set(0, 0, 10);
     scene.add(frontLight);
 
-    const backLight = new t.DirectionalLight(0xFFFFFF, 1.0);
-    backLight.position.set(0, 2, -4);
+    const backLight = new t.SpotLight(0xFFFFFF);
+    backLight.position.set(0, 0, -10);
     scene.add(backLight);
 
     //axes
