@@ -10,6 +10,10 @@
     <canvas id="canvas"></canvas>
     <br>
 
+    <label for="speedSlider" id="speedSliderLabel">Rotation Speed</label>
+    <input class="slider" id="speedSlider" type="range" min="0.2" max="2" step="any" value="1">
+    <br>
+
     <label for="nSlider" id="nLabel">N=8</label>
     <input class="slider" id="nSlider" type="range" min="6" max="20" step="2" value="8" list="tickmarks">
     <datalist id="tickmarks">
@@ -23,6 +27,8 @@
         <option value="20">20</option>
     </datalist>
     <br>
+
+    <p>––– Debug Stuff –––</p>
 
     <label for="checkbox1">Show unit vectors</label>
     <input class="checkbox" id="checkbox1" type="checkbox" checked/>

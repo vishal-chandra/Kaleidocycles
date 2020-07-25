@@ -4,7 +4,9 @@ import {Kaleidocycle} from "./kaleidocycle.js"
 
 let canvas, renderer, camera, controls, scene; //render tools
 let kal, u, v, w, nAlpha, eAlpha; //objects
-let frames = 0; //frame counter
+//animation options
+let frames = 0;
+let rotationSpeed = 1; //rotation speed as a multiple of time
 
 setup();
 draw();
@@ -95,6 +97,13 @@ function setup() {
             nAlpha.visible = show;
             eAlpha.visible = show;
         }
+    );
+
+    let speedSlider = document.getElementById('speedSlider');
+    speedSlider.addEventListener(
+        'change', function() {
+            rotationSpeed = speedSlider.value;
+        }
     )
 }
 
@@ -124,7 +133,7 @@ function draw() {
         */
         frames++;
         time *= 0.001; //ms to s
-        kal.time = time;
+        kal.time = rotationSpeed * time;
         kal.transform();
         updateArrows();
 
