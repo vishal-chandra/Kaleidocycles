@@ -2,7 +2,7 @@
  * A class to encapsulate the data of the kaleidocycle itself
  */
 
-import {Vector3, Geometry, Face3, Mesh, Matrix4, MeshLambertMaterial, MeshNormalMaterial} from "./lib/three.js-r115/build/three.module.js";
+import {Vector3, Geometry, Face3, Mesh, Matrix4, MeshPhongMaterial, MeshNormalMaterial} from "./lib/three.js-r115/build/three.module.js";
 
 export class Kaleidocycle {
 
@@ -50,7 +50,7 @@ export class Kaleidocycle {
         for(let i = 0; i < this.n; i++) {
             this.tets.push(new Mesh(
                 this.baseGeometry, 
-                new MeshLambertMaterial({color: this.colors[i % this.colors.length]})
+                new MeshPhongMaterial({color: this.colors[i % this.colors.length]})
             ));
         }
 
@@ -152,21 +152,17 @@ export class Kaleidocycle {
         this.updateVectors(this.time);
         this.update_M();
 
-        for(let i = 0; i < 2; i++) {
-            let tet = this.tets[i];
+        //undo last transform
+        this.baseGeometry.applyMatrix4(new Matrix4().getInverse(this.transMat));
 
-            //undo last transform
-            tet.geometry.applyMatrix4(new Matrix4().getInverse(this.transMat));
-
-            //calc new
-            this.transMat.set(
-                this.u.x, this.w.x, this.v.x, this.M.x,
-                this.u.y, this.w.y, this.v.y, this.M.y,
-                this.u.z, this.w.z, this.v.z, this.M.z,
-                0,        0,        0,        1
-            );
-            tet.geometry.applyMatrix4(this.transMat);
-        }
+        //calc new
+        this.transMat.set(
+            this.u.x, this.w.x, this.v.x, this.M.x,
+            this.u.y, this.w.y, this.v.y, this.M.y,
+            this.u.z, this.w.z, this.v.z, this.M.z,
+            0,        0,        0,        1
+        );
+        this.baseGeometry.applyMatrix4(this.transMat);
     }
 
     destroy(scene) {

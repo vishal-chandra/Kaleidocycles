@@ -104,7 +104,15 @@ function setup() {
         'change', function() {
             rotationSpeed = speedSlider.value;
         }
-    )
+    );
+
+    let lambdaSlider = document.getElementById('lambdaSlider');
+    lambdaSlider.addEventListener(
+        'input', function() {
+            // let a = new t.Vector3(, -)
+
+        }
+    );
 }
 
 /**
