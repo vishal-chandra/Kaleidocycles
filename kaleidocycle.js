@@ -105,6 +105,14 @@ export class Kaleidocycle {
 
         //transfrom matrix so we don't have to keep creating new ones
         this.transMat = new Matrix4();
+
+        /*
+            UI COMPONENTS
+        */
+        let lambdaSlider = document.getElementById('lambdaSlider');
+        lambdaSlider.max = this.h / Math.tan(this.alpha);
+        lambdaSlider.value = this.s / 2;
+
     }
 
     calculate_u(t) {

@@ -109,8 +109,7 @@ function setup() {
     let lambdaSlider = document.getElementById('lambdaSlider');
     lambdaSlider.addEventListener(
         'input', function() {
-            // let a = new t.Vector3(, -)
-
+            console.log(lambdaSlider.value);
         }
     );
 }
