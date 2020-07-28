@@ -110,6 +110,10 @@ export class Kaleidocycle {
 
         /*
             UI COMPONENTS
+
+            muSlider and nuSlider are not here
+            because their min and max values are not dependent
+            on kaleidocycle properties
         */
         let lambdaSlider = document.getElementById('lambdaSlider');
         lambdaSlider.max = this.h / Math.tan(this.alpha);
