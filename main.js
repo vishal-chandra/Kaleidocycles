@@ -6,6 +6,7 @@ let canvas, renderer, camera, controls, scene; //render tools
 let kal, u, v, w, nAlpha, eAlpha; //objects
 //animation options
 let frames = 0;
+let lastTime = 0; //time at last frame. used for speed control
 let rotationSpeed = 1; //rotation speed as a multiple of time
 
 setup();
@@ -180,20 +181,18 @@ function draw() {
         */
         frames++;
         time *= 0.001; //ms to s
-        kal.time = rotationSpeed * time;
+        kal.time += rotationSpeed * (lastTime - time);
         kal.transform();
         updateArrows();
 
+        lastTime = time;
+        
         //Every 120 frames; every two seconds @60hz
-        if(frames % 120 == 0 && document.getElementById('logbox').checked) {
-            console.log(
-                //JSON.parse(JSON.stringify({debug statement})),
-                lambdaSlider.value,
-                muSlider.value,
-                kappaSlider.value,
-                nuSlider.value
-            );
-        }
+        // if(frames % 120 == 0 && document.getElementById('logbox').checked) {
+        //     console.log(
+        //         JSON.parse(JSON.stringify({debug statement})),
+        //     );
+        // }
 
         /*
             Boilerplate
