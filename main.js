@@ -111,39 +111,20 @@ function setup() {
 
     lambdaSlider.addEventListener(
         'input', function() {
-            //dealing with A
-            kal.baseGeometry.vertices[0].x = -lambdaSlider.value; //adjust
-            kal.baseGeometry.vertices[0].y = -kal.h/2; //reset to default
-            kal.baseGeometry.vertices[0].z = 0; //reset
-
-            /*
-            bring this vertex back to where it should be relative to the
-            rest of the tetrahedron
-            */
-            kal.baseGeometry.vertices[0].applyMatrix4(kal.transMat);
-
-            //dealing with B
+            
+            updateAfromLambda(lambdaSlider.value);
             /*
             since mu is a percentage of lambda, both A and B are
             dependent on lambda
             */
-            kal.baseGeometry.vertices[1].x = muSlider.value * lambdaSlider.value;
-            kal.baseGeometry.vertices[1].y = -kal.h/2;
-            kal.baseGeometry.vertices[1].z = 0;
-            kal.baseGeometry.vertices[1].applyMatrix4(kal.transMat);
-
+            updateBfromMu(muSlider.value, lambdaSlider.value);
             kal.baseGeometry.verticesNeedUpdate = true;
         }
     );
 
     muSlider.addEventListener(
         'input', function() {
-            //dealing with B
-            kal.baseGeometry.vertices[1].x = muSlider.value * lambdaSlider.value;
-            kal.baseGeometry.vertices[1].y = -kal.h/2;
-            kal.baseGeometry.vertices[1].z = 0;
-
-            kal.baseGeometry.vertices[1].applyMatrix4(kal.transMat);
+            updateBfromMu(muSlider.value, lambdaSlider.value);
             kal.baseGeometry.verticesNeedUpdate = true;
         }
     );
@@ -203,8 +184,29 @@ function draw() {
 
 }
 
+//Helper methods
 function updateArrows() {
     u.setDirection(kal.u);
     v.setDirection(kal.v);
     w.setDirection(kal.w);
+}
+
+function updateAfromLambda(lambda) {
+    kal.baseGeometry.vertices[0].x = -lambda; //adjust
+    kal.baseGeometry.vertices[0].y = -kal.h/2; //reset to default
+    kal.baseGeometry.vertices[0].z = 0; //reset
+
+    /*
+    bring this vertex back to where it should be relative to the
+    rest of the tetrahedron
+    */
+    kal.baseGeometry.vertices[0].applyMatrix4(kal.transMat);
+}
+
+function updateBfromMu(mu, lambda) {
+    kal.baseGeometry.vertices[1].x = mu * lambda;
+    kal.baseGeometry.vertices[1].y = -kal.h/2;
+    kal.baseGeometry.vertices[1].z = 0;
+
+    kal.baseGeometry.vertices[1].applyMatrix4(kal.transMat);
 }
