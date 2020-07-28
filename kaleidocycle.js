@@ -33,13 +33,14 @@ export class Kaleidocycle {
 
         //geometry
         this.baseGeometry = new Geometry();
-        this.baseGeometry.vertices.push(
-            this.A, this.B, this.C, this.D
-        );
+        this.baseGeometry.vertices = [
+            this.A.clone(), this.B.clone(), this.C.clone(), this.D.clone()
+        ];
         this.baseGeometry.faces.push(
             new Face3(0,3,1), new Face3(0,1,2), 
             new Face3(1,3,2), new Face3(2,3,0)
         );
+
         //enables lighting
         this.baseGeometry.computeFaceNormals();
 
@@ -105,6 +106,7 @@ export class Kaleidocycle {
 
         //transfrom matrix so we don't have to keep creating new ones
         this.transMat = new Matrix4();
+        //this.transform(0); //perform intial transform on init
 
         /*
             UI COMPONENTS
