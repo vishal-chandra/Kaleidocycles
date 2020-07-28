@@ -111,20 +111,26 @@ export class Kaleidocycle {
         /*
             UI COMPONENTS
 
-            muSlider and nuSlider are not here
-            because their min and max values are not dependent
-            on kaleidocycle properties
+            reset sliders when new kaleidocycle is created
         */
         let lambdaSlider = document.getElementById('lambdaSlider');
         lambdaSlider.max = this.h / Math.tan(this.alpha);
-
         //since no regular kaleidocycle exists for n = 6
         lambdaSlider.value = this.n == 6 ? lambdaSlider.max : this.s / 2;
+        this.updateAfromLambda(lambdaSlider.value);
+
+        let muSlider = document.getElementById('muSlider');
+        muSlider.value = 1;
+        this.updateBfromMu(muSlider.value, lambdaSlider.value);
 
         let kappaSlider = document.getElementById('kappaSlider');
         kappaSlider.max = this.h / Math.tan(this.alpha);
         kappaSlider.value = this.n == 6 ? kappaSlider.max : this.s / 2;
+        this.updateCfromKappa(kappaSlider.value);
 
+        let nuSlider = document.getElementById('nuSlider');
+        nuSlider.value = 1;
+        this.updateDfromNu(nuSlider.value, kappaSlider.value);
     }
 
     calculate_u(t) {
