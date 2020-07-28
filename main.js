@@ -119,35 +119,35 @@ function setup() {
     lambdaSlider.addEventListener(
         'input', function() {
             
-            updateAfromLambda(lambdaSlider.value);
+            kal.updateAfromLambda(lambdaSlider.value);
             /*
             since mu is a percentage of lambda, both A and B are
             dependent on lambda
             */
-            updateBfromMu(muSlider.value, lambdaSlider.value);
-            kal.baseGeometry.verticesNeedUpdate = true;
+            kal.updateBfromMu(muSlider.value, lambdaSlider.value);
+            kal.setVertexFlag();
         }
     );
 
     muSlider.addEventListener(
         'input', function() {
-            updateBfromMu(muSlider.value, lambdaSlider.value);
-            kal.baseGeometry.verticesNeedUpdate = true;
+            kal.updateBfromMu(muSlider.value, lambdaSlider.value);
+            kal.setVertexFlag();
         }
     );
 
     kappaSlider.addEventListener(
         'input', function() {
-            updateCfromKappa(kappaSlider.value);
-            updateDfromNu(nuSlider.value, kappaSlider.value);
-            kal.baseGeometry.verticesNeedUpdate = true;
+            kal.updateCfromKappa(kappaSlider.value);
+            kal.updateDfromNu(nuSlider.value, kappaSlider.value);
+            kal.setVertexFlag();
         }
     );
 
     nuSlider.addEventListener(
         'input', function() {
             updateDfromNu(nuSlider.value, kappaSlider.value);
-            kal.baseGeometry.verticesNeedUpdate = true;
+            kal.setVertexFlag();
         }
     );
 
@@ -186,10 +186,13 @@ function draw() {
 
         //Every 120 frames; every two seconds @60hz
         if(frames % 120 == 0 && document.getElementById('logbox').checked) {
-            // console.log(
-            //     JSON.parse(JSON.stringify(kal.tets[0].geometry.vertices)), //put obj here to debug
-            //     kal.time
-            // );
+            console.log(
+                //JSON.parse(JSON.stringify({debug statement})),
+                lambdaSlider.value,
+                muSlider.value,
+                kappaSlider.value,
+                nuSlider.value
+            );
         }
 
         /*
@@ -213,40 +216,4 @@ function updateArrows() {
     u.setDirection(kal.u);
     v.setDirection(kal.v);
     w.setDirection(kal.w);
-}
-
-function updateAfromLambda(lambda) {
-    kal.baseGeometry.vertices[0].x = -lambda; //adjust
-    kal.baseGeometry.vertices[0].y = -kal.h/2; //reset to default
-    kal.baseGeometry.vertices[0].z = 0; //reset
-
-    /*
-    bring this vertex back to where it should be relative to the
-    rest of the tetrahedron
-    */
-    kal.baseGeometry.vertices[0].applyMatrix4(kal.transMat);
-}
-
-function updateBfromMu(mu, lambda) {
-    kal.baseGeometry.vertices[1].x = mu * lambda;
-    kal.baseGeometry.vertices[1].y = -kal.h/2;
-    kal.baseGeometry.vertices[1].z = 0;
-
-    kal.baseGeometry.vertices[1].applyMatrix4(kal.transMat);
-}
-
-function updateCfromKappa(kappa) {
-    kal.baseGeometry.vertices[2].x = 0;
-    kal.baseGeometry.vertices[2].y = kal.h/2;
-    kal.baseGeometry.vertices[2].z = -kappa;
-
-    kal.baseGeometry.vertices[2].applyMatrix4(kal.transMat);
-}
-
-function updateDfromNu(nu, kappa) {
-    kal.baseGeometry.vertices[3].x = 0;
-    kal.baseGeometry.vertices[3].y = kal.h/2;
-    kal.baseGeometry.vertices[3].z = nu * kappa;
-
-    kal.baseGeometry.vertices[3].applyMatrix4(kal.transMat);
 }

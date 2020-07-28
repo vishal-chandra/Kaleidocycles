@@ -117,11 +117,13 @@ export class Kaleidocycle {
         */
         let lambdaSlider = document.getElementById('lambdaSlider');
         lambdaSlider.max = this.h / Math.tan(this.alpha);
-        lambdaSlider.value = this.s / 2;
+
+        //since no regular kaleidocycle exists for n = 6
+        lambdaSlider.value = this.n == 6 ? lambdaSlider.max : this.s / 2;
 
         let kappaSlider = document.getElementById('kappaSlider');
         kappaSlider.max = this.h / Math.tan(this.alpha);
-        kappaSlider.value = this.s / 2;
+        kappaSlider.value = this.n == 6 ? kappaSlider.max : this.s / 2;
 
     }
 
@@ -181,6 +183,47 @@ export class Kaleidocycle {
             0,        0,        0,        1
         );
         this.baseGeometry.applyMatrix4(this.transMat);
+    }
+
+    //vertex updaters
+    updateAfromLambda(lambda) {
+        this.baseGeometry.vertices[0].x = -lambda; //adjust
+        this.baseGeometry.vertices[0].y = -this.h/2; //reset to default
+        this.baseGeometry.vertices[0].z = 0; //reset
+
+        /*
+        bring this vertex back to where it should be relative to the
+        rest of the tetrahedron
+        */
+        this.baseGeometry.vertices[0].applyMatrix4(this.transMat);
+    }
+
+    updateBfromMu(mu, lambda) {
+        this.baseGeometry.vertices[1].x = mu * lambda;
+        this.baseGeometry.vertices[1].y = -this.h/2;
+        this.baseGeometry.vertices[1].z = 0;
+
+        this.baseGeometry.vertices[1].applyMatrix4(this.transMat);
+    }
+
+    updateCfromKappa(kappa) {
+        this.baseGeometry.vertices[2].x = 0;
+        this.baseGeometry.vertices[2].y = this.h/2;
+        this.baseGeometry.vertices[2].z = -kappa;
+
+        this.baseGeometry.vertices[2].applyMatrix4(this.transMat);
+    }
+
+    updateDfromNu(nu, kappa) {
+        this.baseGeometry.vertices[3].x = 0;
+        this.baseGeometry.vertices[3].y = this.h/2;
+        this.baseGeometry.vertices[3].z = nu * kappa;
+
+        this.baseGeometry.vertices[3].applyMatrix4(this.transMat);
+    }
+
+    setVertexFlag() {
+        this.baseGeometry.verticesNeedUpdate = true;
     }
 
     destroy(scene) {
