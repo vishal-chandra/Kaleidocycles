@@ -107,7 +107,7 @@ function setup() {
 
     let speedSlider = document.getElementById('speedSlider');
     speedSlider.addEventListener(
-        'change', function() {
+        'input', function() {
             rotationSpeed = speedSlider.value;
         }
     );
@@ -186,7 +186,7 @@ function draw() {
         updateArrows();
 
         lastTime = time;
-        
+
         //Every 120 frames; every two seconds @60hz
         // if(frames % 120 == 0 && document.getElementById('logbox').checked) {
         //     console.log(

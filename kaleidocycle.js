@@ -34,7 +34,7 @@ export class Kaleidocycle {
         //geometry
         this.baseGeometry = new Geometry();
         this.baseGeometry.vertices = [
-            this.A.clone(), this.B.clone(), this.C.clone(), this.D.clone()
+            this.A, this.B, this.C, this.D
         ];
         this.baseGeometry.faces.push(
             new Face3(0,3,1), new Face3(0,1,2), 
@@ -44,7 +44,7 @@ export class Kaleidocycle {
         //enables lighting
         this.baseGeometry.computeFaceNormals();
 
-        this.colors = [0xFF0000, 0x6FFF00, 0x00E1FF, 0xFFA600, 0xD400FF]
+        this.colors = [0xFF0000, 0x6FFF00, 0x00E1FF, 0xFFA600, 0xD400FF, 0xEDCA18]
 
         //mesh array
         this.tets = []
@@ -61,9 +61,9 @@ export class Kaleidocycle {
 
         //n-specific transforms: the relationship between each Tn and T0
         /* 
-        object mat instead of geometry mat because it doesn't affect vertices
+        modifying object mat instead of geometry mat because it doesn't affect vertices.
         this means that the translation is also taken into account when
-        reflection and z-rotations take place
+        reflection and z-rotations take place.
         */
         for(let i = 1; i < this.tets.length; i++) {
             let mat = this.tets[i].matrix;
@@ -106,7 +106,6 @@ export class Kaleidocycle {
 
         //transfrom matrix so we don't have to keep creating new ones
         this.transMat = new Matrix4();
-        //this.transform(0); //perform intial transform on init
 
         /*
             UI COMPONENTS
@@ -161,8 +160,7 @@ export class Kaleidocycle {
         this.calculate_v();
         this.calculate_w();
     }
-
-    //no params because it is dependent on time-dependent vectors
+    
     update_M() {
         this.M.set(
             (this.w.y / Math.tan(this.alpha)) - (this.w.x / 2), 
