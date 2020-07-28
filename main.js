@@ -59,19 +59,24 @@ function setup() {
     let linGeo = new t.BufferGeometry().setFromPoints(points);
     eAlpha = new t.Line(linGeo, new t.LineBasicMaterial({color: 0x000000}));
     scene.add(eAlpha);
+    eAlpha.visible = false;
 
     //show norms
     u = new t.ArrowHelper(kal.u, new t.Vector3(0,0,0), 1, 0xff00ff);
     scene.add(u)
+    u.visible = false;
 
     v = new t.ArrowHelper(kal.v, new t.Vector3(0,0,0), 1, 0xff00ff);
     scene.add(v);
+    v.visible = false;
 
     w = new t.ArrowHelper(kal.w, new t.Vector3(0,0,0), 1, 0xff00ff);
     scene.add(w);
+    w.visible = false;
 
     nAlpha = new t.ArrowHelper(kal.nAlpha, new t.Vector3(0,0,0), 1, 0x000000);
     scene.add(nAlpha);
+    nAlpha.visible = false;
 
 
     //EVENT LISTENERS
@@ -234,7 +239,7 @@ function updateCfromKappa(kappa) {
     kal.baseGeometry.vertices[2].x = 0;
     kal.baseGeometry.vertices[2].y = kal.h/2;
     kal.baseGeometry.vertices[2].z = -kappa;
-    
+
     kal.baseGeometry.vertices[2].applyMatrix4(kal.transMat);
 }
 
