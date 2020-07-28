@@ -109,13 +109,12 @@ function setup() {
     let lambdaSlider = document.getElementById('lambdaSlider');
     lambdaSlider.addEventListener(
         'input', function() {
-            kal.tets.forEach(tet => {
-                tet.geometry.vertices[0].x = -lambdaSlider.value;
-                tet.geometry.vertices[0].y = -kal.h/2;
-                tet.geometry.vertices[0].z = 0;
-                tet.geometry.vertices[0].applyMatrix4(kal.transMat);
-                tet.geometry.verticesNeedUpdate = true;
-            })
+            kal.baseGeometry.vertices[0].x = -lambdaSlider.value;
+            kal.baseGeometry.vertices[0].y = -kal.h/2;
+            kal.baseGeometry.vertices[0].z = 0;
+
+            kal.baseGeometry.vertices[0].applyMatrix4(kal.transMat);
+            kal.baseGeometry.verticesNeedUpdate = true;
         }
     );
 }
