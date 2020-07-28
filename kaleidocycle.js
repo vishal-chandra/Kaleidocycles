@@ -119,6 +119,10 @@ export class Kaleidocycle {
         lambdaSlider.max = this.h / Math.tan(this.alpha);
         lambdaSlider.value = this.s / 2;
 
+        let kappaSlider = document.getElementById('kappaSlider');
+        kappaSlider.max = this.h / Math.tan(this.alpha);
+        kappaSlider.value = this.s / 2;
+
     }
 
     calculate_u(t) {

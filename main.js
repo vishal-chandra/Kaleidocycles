@@ -108,6 +108,7 @@ function setup() {
 
     let lambdaSlider = document.getElementById('lambdaSlider');
     let muSlider = document.getElementById('muSlider');
+    let kappaSlider = document.getElementById('kappaSlider');
 
     lambdaSlider.addEventListener(
         'input', function() {
@@ -125,6 +126,13 @@ function setup() {
     muSlider.addEventListener(
         'input', function() {
             updateBfromMu(muSlider.value, lambdaSlider.value);
+            kal.baseGeometry.verticesNeedUpdate = true;
+        }
+    );
+
+    kappaSlider.addEventListener(
+        'input', function() {
+            updateCfromKappa(kappaSlider.value);
             kal.baseGeometry.verticesNeedUpdate = true;
         }
     );
@@ -209,4 +217,11 @@ function updateBfromMu(mu, lambda) {
     kal.baseGeometry.vertices[1].z = 0;
 
     kal.baseGeometry.vertices[1].applyMatrix4(kal.transMat);
+}
+
+function updateCfromKappa(kappa) {
+    kal.baseGeometry.vertices[2].x = 0;
+    kal.baseGeometry.vertices[2].y = kal.h/2;
+    kal.baseGeometry.vertices[2].z = -kappa;
+    kal.baseGeometry.vertices[2].applyMatrix4(kal.transMat);
 }
