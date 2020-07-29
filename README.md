@@ -1,8 +1,9 @@
 # Kaleidocycles
 
 (WIP)<br>
-This is a project to simulate and design kaleidocycles using three.js. <br>
-It follows the equations explained in [this paper](res/kaleidocycles_theory.pdf) to model the Kaleidocycle's behavior. 
+This is a project to simulate and design kaleidocycles using Three.js. <br>
+It follows the equations explained in [this paper](res/kaleidocycles_theory.pdf) to model 
+kaleidocyclic behavior. 
 
 ## Demos
 Coming Soon!
