@@ -4,70 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaleidocycles</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
+<header>
+    <strong>Kaleidocycles</strong>
+</header>
 <body>
     <canvas id="canvas"></canvas>
-    <br>
 
-    <label for="speedSlider" id="speedSliderLabel">Rotation Speed</label>
-    <input class="slider" id="speedSlider" type="range" min="0" max="2" step="any" value="1">
-    <br>
+    <div class="controls">
 
-    <p>––– Kaleidocycle Properties ––––</p>
+        <div class="speed">
+            <label for="speedSlider" id="speedSliderLabel">Rotation Speed</label>
+            <input class="slider" id="speedSlider" type="range" min="0" max="2" step="any" value="1">
+            <br>
+        </div>
 
-    <label for="nSlider" id="nLabel">N=8</label>
-    <input class="slider" id="nSlider" type="range" min="6" max="20" step="2" value="8" list="nTicks">
-    <datalist id="nTicks">
-        <option value="6">6</option>
-        <option value="8">8</option>
-        <option value="10">10</option>
-        <option value="12">12</option>
-        <option value="14">14</option>
-        <option value="16">16</option>
-        <option value="18">18</option>
-        <option value="20">20</option>
-    </datalist>
-    <br>
+        <div class="properties">
+            <p><strong>Properties</strong></p>
 
-    <p>
-        <strong>Length Modifiers</strong> <br>
-        λ,κ ∈ [0, h/tan(α)] (OP) <br>
-        μ ∈ [-1, 1] <br>
-        v ∈ [-1, 1] <br>
-    </p>
+            <label for="nSlider" id="nLabel">N=8</label>
+            <input class="slider" id="nSlider" type="range" min="6" max="20" step="2" value="8" list="nTicks">
+            <datalist id="nTicks">
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+            </datalist>
+            <br>
+        </div>
 
-    <label for="lambdaSlider" id="lambdaLabel">λ</label>
-    <input class="slider" id="lambdaSlider" type="range" min="0" max="1" step="any" value="0">
+        <div class='lengthModifiers'>
+            <p>
+                <strong>Length Modifiers</strong> <br>
+                λ,κ ∈ [0, h/tan(α)] (OP) <br>
+                μ ∈ [-1, 1] <br>
+                v ∈ [-1, 1] <br>
+            </p>
 
-    <label for="muSlider" id="muLabel">μ</label>
-    <input class="slider" id="muSlider" type="range" min="-1" max="1" step="any" value="1" list='muTicks'>
-    <datalist id="muTicks">
-        <option value="-1">-1</option>
-        <option value="0">0</option>
-        <option value="1">1</option>
-    </datalist>
+            <label for="lambdaSlider" id="lambdaLabel">λ</label>
+            <input class="slider" id="lambdaSlider" type="range" min="0" max="1" step="any" value="0">
 
-    <br>
+            <label for="muSlider" id="muLabel">μ</label>
+            <input class="slider" id="muSlider" type="range" min="-1" max="1" step="any" value="1" list='muTicks'>
+            <datalist id="muTicks">
+                <option value="-1">-1</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+            </datalist>
 
-    <label for="kappaSlider" id="kappaLabel">κ</label>
-    <input class="slider" id="kappaSlider" type="range" min="0" max="1" step="any" value="0">
+            <br>
 
-    <label for="nuSlider" id="nuLabel">ν</label>
-    <input class="slider" id="nuSlider" type="range" min="-1" max="1" step="any" value="1" list="nuTicks">
-    <datalist id="nuTicks">
-        <option value="-1">-1</option>
-        <option value="0">0</option>
-        <option value="1">1</option>
-    </datalist>
+            <label for="kappaSlider" id="kappaLabel">κ</label>
+            <input class="slider" id="kappaSlider" type="range" min="0" max="1" step="any" value="0">
 
-    <p>––– Debug Stuff –––</p>
+            <label for="nuSlider" id="nuLabel">ν</label>
+            <input class="slider" id="nuSlider" type="range" min="-1" max="1" step="any" value="1" list="nuTicks">
+            <datalist id="nuTicks">
+                <option value="-1">-1</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+            </datalist>
+        </div>
 
-    <label for="checkbox1">Show unit vectors</label>
-    <input class="checkbox" id="checkbox1" type="checkbox" unchecked/>
+        <div class="debug">
+            <p>––– Debug Stuff –––</p>
 
-    <label for="logbox">Toggle Logs</label>
-    <input class="checkbox" id="logbox" type="checkbox" checked/>
+            <label for="checkbox1">Show unit vectors</label>
+            <input class="checkbox" id="checkbox1" type="checkbox" unchecked/>
+
+            <label for="logbox">Toggle Logs</label>
+            <input class="checkbox" id="logbox" type="checkbox" checked/>
+        </div>
+    </div>
 </body>
 <script type="module" src="js/kaleidocycle.js"></script>
 <script type="module" src="js/main.js"></script>
