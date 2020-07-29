@@ -2,7 +2,7 @@
  * A class to encapsulate the data of the kaleidocycle itself
  */
 
-import {Vector3, Geometry, Face3, Mesh, Matrix4, MeshPhongMaterial, MeshNormalMaterial} from "../lib/three.js-r115/build/three.module.js";
+import {Vector3, Geometry, Face3, Mesh, Matrix4, MeshPhongMaterial, MeshNormalMaterial} from "./three/three.module.js";
 
 export class Kaleidocycle {
 
