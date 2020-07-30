@@ -12,6 +12,7 @@ Coming Soon!
 [Three.js Docs](https://threejs.org) <br>
 [Three.js Fundamentals](https://threejsfundamentals.org) <br>
 [Three.js r115 Source](https://github.com/mrdoob/three.js/releases/tag/r115) <br>
-[3D Reflection Matrix](https://en.wikipedia.org/wiki/Transformation_matrix#Reflection_2)
+[3D Reflection Matrix](https://en.wikipedia.org/wiki/Transformation_matrix#Reflection_2) <br>
+[Transformation Debugging](https://www.desmos.com/calculator/a0a1wpo2ib)
 
 
