@@ -147,7 +147,7 @@ function setup() {
 
     nuSlider.addEventListener(
         'input', function() {
-            updateDfromNu(nuSlider.value, kappaSlider.value);
+            kal.updateDfromNu(nuSlider.value, kappaSlider.value);
             kal.setVertexFlag();
         }
     );
