@@ -161,6 +161,7 @@ function setup() {
 function draw() {
     
     //sets the renderer's resolution to the canvas size when needed
+    //TODO: resize handling can be cleaner–https://stackoverflow.com/a/20434960
     function resizeRenderer(renderer) {
         let displayWidth = canvas.clientWidth;
         let displayHeight = canvas.clientHeight;

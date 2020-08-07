@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSG Proof of Concept</title>
+    <link rel='stylesheet' href='./style.css'>
+</head>
+<body>
+    <canvas id='canvas'></canvas>
+    <label for='toolX'>Tool X:</label>
+    <input id='toolX' type='range' min='-3' max='3' step='any' value='0'> <br>
+
+    <label for='toolY'>Tool Y:</label>
+    <input id='toolY' type='range' min='-3' max='3' step='any' value='0'> <br>
+
+    <label for='toolZ'>Tool Z:</label>
+    <input id='toolZ' type='range' min='-3' max='3' step='any' value='0'> <br><br>
+
+    <button id='doCSG'>Do CSG</button>
+    <button id='undoCSG'>Undo Last CSG</button> <br>
+    <button id='toolToggle'>Toggle Tool</button>
+</body>
+<script type='module' src='./csgDemo.js'></script>
+</html>
