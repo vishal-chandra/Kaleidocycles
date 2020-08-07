@@ -54,7 +54,7 @@ Thumbs.db
 *.pem
 
 # project specific
-lib/
+lib/full/
 
 # -------------------------
 # BEGIN Whitelisted Files

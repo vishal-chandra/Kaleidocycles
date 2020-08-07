@@ -1,5 +1,5 @@
-import * as t from "./three/three.module.js";
-import {OrbitControls} from "./three/OrbitControls.js";
+import * as t from "../lib/three/three.module.js";
+import {OrbitControls} from "../lib/three/OrbitControls.js";
 import {Kaleidocycle} from "./kaleidocycle.js";
 
 let canvas, renderer, camera, controls, scene; //render tools

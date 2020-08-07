@@ -1,6 +1,6 @@
-import * as t from "../js/three/three.module.js";
-import {OrbitControls} from "../js/three/OrbitControls.js";
-import CSG from "../js/csg/CSGMesh.js";
+import * as t from "../lib/three/three.module.js";
+import {OrbitControls} from "../lib/three/OrbitControls.js";
+import CSG from "../lib/csg/CSGMesh.js";
 
 let canvas, renderer, camera, controls, scene; //render tools
 let tet, tool, lastTet;
