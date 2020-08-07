@@ -28,6 +28,7 @@ function setup() {
     orbit.update();
 
     controls = new TransformControls(camera, renderer.domElement);
+    controls.setMode('rotate');
     controls.addEventListener('dragging-changed', function (event) {
         orbit.enabled = ! event.value;
     });
@@ -60,8 +61,8 @@ function setup() {
     scene.add(tet);
 
     tool = new t.Mesh(
-        new t.SphereGeometry(1, 15, 15),
-        //new t.BoxGeometry(1, 1, 1),
+        //new t.SphereGeometry(1, 15, 15),
+        new t.BoxGeometry(1, 1, 1),
         //new t.DodecahedronGeometry(1),
         //new t.CylinderGeometry(0.5, 0.5, 4, 15),
         new t.MeshStandardMaterial({color: 0x918c8c})
@@ -114,6 +115,7 @@ function setup() {
         toolToggle.onclick = function() {
             tool.visible = !tool.visible;
             controls.visible = !controls.visible;
+            controls.enabled = !controls.enabled;
         }
 
         let undoButton = document.getElementById('undoCSG');
