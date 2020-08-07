@@ -8,6 +8,8 @@
 </head>
 <body>
     <canvas id='canvas'></canvas>
+
+    <!-- sliders -->
     <label for='toolX'>Tool X:</label>
     <input id='toolX' type='range' min='-3' max='3' step='any' value='0'> <br>
 
@@ -17,8 +19,10 @@
     <label for='toolZ'>Tool Z:</label>
     <input id='toolZ' type='range' min='-3' max='3' step='any' value='0'> <br><br>
 
+    <!-- buttons -->
     <button id='doCSG'>Do CSG</button>
-    <button id='undoCSG'>Undo Last CSG</button> <br>
+    <button id='undoCSG'>Undo Last CSG</button>
+    <button id='resetCSG'>Reset CSG</button> <br>
     <button id='toolToggle'>Toggle Tool</button>
 </body>
 <script type='module' src='./csgDemo.js'></script>

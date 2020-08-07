@@ -54,6 +54,8 @@ function setup() {
     //axes
     scene.add(new t.AxesHelper(100));
 
+    //csg components
+
     tet = new t.Mesh(
         new t.TetrahedronGeometry(2), 
         new t.MeshStandardMaterial({color: 0x44aa88})
@@ -73,7 +75,6 @@ function setup() {
     controls.attach(tool);
     scene.add(controls);
     
-
 
     /*
         EVENT LISTENERS
@@ -123,6 +124,18 @@ function setup() {
             scene.remove(tet);
 
             tet = lastTet.clone();
+
+            scene.add(tet);
+        }
+
+        let resetButton = document.getElementById('resetCSG');
+        resetButton.onclick = function() {
+            scene.remove(tet);
+
+            tet = new t.Mesh(
+                new t.TetrahedronGeometry(2), 
+                new t.MeshStandardMaterial({color: 0x44aa88})
+            );
 
             scene.add(tet);
         }
