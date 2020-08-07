@@ -58,7 +58,7 @@ function setup() {
 
     tet = new t.Mesh(
         new t.TetrahedronGeometry(2), 
-        new t.MeshStandardMaterial({color: 0x44aa88})
+        new t.MeshNormalMaterial({color: 0x44aa88})
     );
     scene.add(tet);
 
@@ -69,6 +69,7 @@ function setup() {
         //new t.CylinderGeometry(0.5, 0.5, 4, 15),
         new t.MeshStandardMaterial({color: 0x918c8c})
     );
+    tool.position.x = 2;
     scene.add(tool);
 
     //attach and add
@@ -134,7 +135,7 @@ function setup() {
 
             tet = new t.Mesh(
                 new t.TetrahedronGeometry(2), 
-                new t.MeshStandardMaterial({color: 0x44aa88})
+                new t.MeshNormalMaterial({color: 0x44aa88})
             );
 
             scene.add(tet);
