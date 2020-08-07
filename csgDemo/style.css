@@ -8,3 +8,41 @@ canvas {
     height: 80%;
     display: block;
 }
+
+button {
+    font-size: 15px;
+    background-color: aliceblue;
+
+    border: 0px;
+    padding: 5px;
+    border-radius: 5px;
+
+    transition-duration: 0.6s;
+}
+
+button:hover {
+    background-color: aquamarine;
+}
+
+.slider{
+    -webkit-appearance: none;
+    appearance: none;
+
+    background: aliceblue;
+    outline: none;
+
+    transition: 1.2s;
+}
+
+.slider:hover{
+    background-color: aquamarine;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px; 
+    background: hotpink;
+    cursor: pointer;
+}
