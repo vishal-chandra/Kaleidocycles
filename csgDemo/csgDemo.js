@@ -1,8 +1,9 @@
 import * as t from "../lib/three/three.module.js";
 import {OrbitControls} from "../lib/three/OrbitControls.js";
+import {TransformControls} from "../lib/three/TransformControls.js";
 import CSG from "../lib/csg/CSGMesh.js";
 
-let canvas, renderer, camera, controls, scene; //render tools
+let canvas, renderer, camera, orbit, controls, scene; //render tools
 let tet, tool, lastTet;
 
 setup();
@@ -22,9 +23,14 @@ function setup() {
     camera = new t.PerspectiveCamera(45, 2, 0.1, 100);
 
     //add controls
-    controls = new OrbitControls(camera, canvas);
+    orbit = new OrbitControls(camera, canvas);
     camera.position.z = 4;
-    controls.update();
+    orbit.update();
+
+    controls = new TransformControls(camera, renderer.domElement);
+    controls.addEventListener('dragging-changed', function (event) {
+        orbit.enabled = ! event.value;
+    });
 
     /*
      * OBJECTS
@@ -61,6 +67,10 @@ function setup() {
         new t.MeshStandardMaterial({color: 0x918c8c})
     );
     scene.add(tool);
+
+    //attach and add
+    controls.attach(tool);
+    scene.add(controls);
     
 
 
@@ -103,6 +113,7 @@ function setup() {
         let toolToggle = document.getElementById('toolToggle');
         toolToggle.onclick = function() {
             tool.visible = !tool.visible;
+            controls.visible = !controls.visible;
         }
 
         let undoButton = document.getElementById('undoCSG');
