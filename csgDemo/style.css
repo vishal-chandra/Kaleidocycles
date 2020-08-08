@@ -20,8 +20,23 @@ button {
     transition-duration: 0.6s;
 }
 
-button:hover {
+button:hover{
     background-color: aquamarine;
+}
+
+.buttons{
+    float: left;
+    padding: 2.1%;
+
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
+
+    transition-duration: 0.5s;
+}
+
+.buttons:hover{
+    border-color: aquamarine;
 }
 
 .slider{
@@ -31,7 +46,7 @@ button:hover {
     background: aliceblue;
     outline: none;
 
-    transition: 1.2s;
+    transition: 1.0s;
 }
 
 .slider:hover{
@@ -41,8 +56,23 @@ button:hover {
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 15px;
-    height: 15px; 
+    width: 20px;
+    height: 20px; 
     background: hotpink;
     cursor: pointer;
+}
+
+.toolControl {
+    float: left;
+    padding: 1.5%;
+
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
+
+    transition-duration: 0.5s;
+}
+
+.toolControl:hover {
+    border-color: aquamarine;
 }
