@@ -118,6 +118,8 @@ function setup() {
             tool.visible = !tool.visible;
             controls.visible = !controls.visible;
             controls.enabled = !controls.enabled;
+
+            toolToggle.innerHTML = tool.visible ? "Hide Tool" : "Show Tool";
         }
 
         let undoButton = document.getElementById('undoCSG');
