@@ -24,7 +24,7 @@ function setup() {
 
     //add controls
     orbit = new OrbitControls(camera, canvas);
-    camera.position.z = 4;
+    camera.position.add(new t.Vector3(4, 4, 4));
     orbit.update();
 
     controls = new TransformControls(camera, renderer.domElement);
