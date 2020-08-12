@@ -1,0 +1,40 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+header {
+    font-size: 35px;
+    text-align: center;
+
+    height: 6%;
+}
+
+#canvas {
+    width: 75%;
+    height: 94%;
+    display: inline-block;
+
+    outline: none;
+}
+
+.controls {
+    display: inline-block;
+    vertical-align: top;
+    height: 94%;
+    width: 24%;
+
+    background-color: rgb(167, 180, 193);
+
+    div:hover {
+        background-color: white;
+    }
+
+    .debug:hover {
+        background-color: rgb(230, 178, 168);
+    }
+
+    .editor:hover {
+        background-color: black;
+    }
+}
