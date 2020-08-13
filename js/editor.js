@@ -80,69 +80,69 @@ function setup() {
     /*
         EVENT LISTENERS
     */
-    // {
-    //     let toolXSlider = document.getElementById('toolX');
-    //     toolXSlider.addEventListener(
-    //         'input', function() {
-    //             tool.position.x = parseFloat(toolXSlider.value, 10);
-    //         }
-    //     );
+    {
+        // let toolXSlider = document.getElementById('toolX');
+        // toolXSlider.addEventListener(
+        //     'input', function() {
+        //         tool.position.x = parseFloat(toolXSlider.value, 10);
+        //     }
+        // );
 
-    //     let toolYSlider = document.getElementById('toolY');
-    //     toolYSlider.addEventListener(
-    //         'input', function() {
-    //             tool.position.y = parseFloat(toolYSlider.value, 10);
-    //         }
-    //     );
+        // let toolYSlider = document.getElementById('toolY');
+        // toolYSlider.addEventListener(
+        //     'input', function() {
+        //         tool.position.y = parseFloat(toolYSlider.value, 10);
+        //     }
+        // );
 
-    //     let toolZSlider = document.getElementById('toolZ');
-    //     toolZSlider.addEventListener(
-    //         'input', function() {
-    //             tool.position.z = parseFloat(toolZSlider.value, 10);
-    //         }
-    //     );
+        // let toolZSlider = document.getElementById('toolZ');
+        // toolZSlider.addEventListener(
+        //     'input', function() {
+        //         tool.position.z = parseFloat(toolZSlider.value, 10);
+        //     }
+        // );
 
-    //     //main action button
-    //     let csgButton = document.getElementById('doCSG');
-    //     csgButton.onclick = function() {
-    //         scene.remove(tet);
+        //main action button
+        let csgButton = document.getElementById('do');
+        csgButton.onclick = function() {
+            scene.remove(tet);
 
-    //         lastTet = tet.clone();
-    //         tet = doCSG(tet, tool, 'subtract');
+            lastTet = tet.clone();
+            tet = doCSG(tet, tool, 'subtract');
 
-    //         scene.add(tet);
-    //     }
+            scene.add(tet);
+        }
 
-    //     let toolToggle = document.getElementById('toolToggle');
-    //     toolToggle.onclick = function() {
-    //         tool.visible = !tool.visible;
-    //         controls.visible = !controls.visible;
-    //         controls.enabled = !controls.enabled;
+        let toolToggle = document.getElementById('toggle');
+        toolToggle.onclick = function() {
+            tool.visible = !tool.visible;
+            controls.visible = !controls.visible;
+            controls.enabled = !controls.enabled;
 
-    //         toolToggle.innerHTML = tool.visible ? "Hide Tool" : "Show Tool";
-    //     }
+            toolToggle.innerHTML = tool.visible ? "Hide Tool" : "Show Tool";
+        }
 
-    //     let undoButton = document.getElementById('undoCSG');
-    //     undoButton.onclick = function() {
-    //         scene.remove(tet);
+        let undoButton = document.getElementById('undo');
+        undoButton.onclick = function() {
+            scene.remove(tet);
 
-    //         tet = lastTet.clone();
+            tet = lastTet.clone();
 
-    //         scene.add(tet);
-    //     }
+            scene.add(tet);
+        }
 
-    //     let resetButton = document.getElementById('resetCSG');
-    //     resetButton.onclick = function() {
-    //         scene.remove(tet);
+        let resetButton = document.getElementById('reset');
+        resetButton.onclick = function() {
+            scene.remove(tet);
 
-    //         tet = new t.Mesh(
-    //             new t.TetrahedronGeometry(2), 
-    //             new t.MeshNormalMaterial({color: 0x44aa88})
-    //         );
+            tet = new t.Mesh(
+                new t.TetrahedronGeometry(2), 
+                new t.MeshNormalMaterial({color: 0x44aa88})
+            );
 
-    //         scene.add(tet);
-    //     }
-    // }
+            scene.add(tet);
+        }
+    }
 }
 
 function draw() {
