@@ -48,7 +48,7 @@ header {
   text-align: center;
 }
 
-.cellEditor canvas {
+.cellEditor #canvas2 {
   display: block;
   background-color: white;
   width: 100%;
@@ -60,7 +60,7 @@ header {
           transition-duration: 0.5s;
 }
 
-.cellEditor canvas:hover {
+.cellEditor #canvas2:hover {
   border-color: teal;
 }
 /*# sourceMappingURL=style.css.map */
