@@ -28,7 +28,7 @@ function setup() {
     orbit.update();
 
     controls = new TransformControls(camera, renderer.domElement);
-    controls.setMode('translate');
+    controls.setMode('rotate');
     controls.addEventListener('dragging-changed', function (event) {
         orbit.enabled = ! event.value;
     });
@@ -81,30 +81,34 @@ function setup() {
         EVENT LISTENERS
     */
     {
-        // let toolXSlider = document.getElementById('toolX');
-        // toolXSlider.addEventListener(
-        //     'input', function() {
-        //         tool.position.x = parseFloat(toolXSlider.value, 10);
-        //     }
-        // );
+        let toolXSlider = document.getElementById('toolX');
+        toolXSlider.addEventListener(
+            'input', function() {
+                tool.position.x = parseFloat(toolXSlider.value, 10);
+            }
+        );
 
-        // let toolYSlider = document.getElementById('toolY');
-        // toolYSlider.addEventListener(
-        //     'input', function() {
-        //         tool.position.y = parseFloat(toolYSlider.value, 10);
-        //     }
-        // );
+        let toolYSlider = document.getElementById('toolY');
+        toolYSlider.addEventListener(
+            'input', function() {
+                tool.position.y = parseFloat(toolYSlider.value, 10);
+            }
+        );
 
-        // let toolZSlider = document.getElementById('toolZ');
-        // toolZSlider.addEventListener(
-        //     'input', function() {
-        //         tool.position.z = parseFloat(toolZSlider.value, 10);
-        //     }
-        // );
+        let toolZSlider = document.getElementById('toolZ');
+        toolZSlider.addEventListener(
+            'input', function() {
+                tool.position.z = parseFloat(toolZSlider.value, 10);
+            }
+        );
 
-        //main action button
-        let csgButton = document.getElementById('do');
-        csgButton.onclick = function() {
+        //buttons
+        let doButton = document.getElementById('do');
+        let toggle = document.getElementById('toggle');
+        let undoButton = document.getElementById('undo');
+        let resetButton = document.getElementById('reset');
+
+        doButton.onclick = function() {
             scene.remove(tet);
 
             lastTet = tet.clone();
@@ -113,16 +117,19 @@ function setup() {
             scene.add(tet);
         }
 
-        let toolToggle = document.getElementById('toggle');
-        toolToggle.onclick = function() {
+        toggle.onclick = function() {
+            //graphics
             tool.visible = !tool.visible;
             controls.visible = !controls.visible;
             controls.enabled = !controls.enabled;
 
-            toolToggle.innerHTML = tool.visible ? "Hide Tool" : "Show Tool";
+            //change button
+            toggle.innerHTML = tool.visible ? "Hide Tool" : "Show Tool";
+
+            //can't carve without seeing tool
+            doButton.disabled = !doButton.disabled;
         }
 
-        let undoButton = document.getElementById('undo');
         undoButton.onclick = function() {
             scene.remove(tet);
 
@@ -131,7 +138,6 @@ function setup() {
             scene.add(tet);
         }
 
-        let resetButton = document.getElementById('reset');
         resetButton.onclick = function() {
             scene.remove(tet);
 

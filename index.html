@@ -82,18 +82,27 @@
                 <button id="reset">Reset Cuts</button>
                 <button id="toggle">Hide Tool</button>
             </div>
+            <div class="sliders">
+                <label for='toolX'>Tool X:</label>
+                <input class='slider' id='toolX' type='range' min='-3' max='3' step='any' value='2'> <br>
+
+                <label for='toolY'>Tool Y:</label>
+                <input class='slider' id='toolY' type='range' min='-3' max='3' step='any' value='0'> <br>
+
+                <label for='toolZ'>Tool Z:</label>
+                <input class='slider' id='toolZ' type='range' min='-3' max='3' step='any' value='0'>
+            </div>
         </div>
+    </div>
+    <br>
+    <div class="debug">
+        <p>––– Debug Stuff –––</p>
 
-        <br>
-        <div class="debug">
-            <p>––– Debug Stuff –––</p>
+        <label for="checkbox1">Show unit vectors</label>
+        <input class="checkbox" id="checkbox1" type="checkbox" unchecked/>
 
-            <label for="checkbox1">Show unit vectors</label>
-            <input class="checkbox" id="checkbox1" type="checkbox" unchecked/>
-
-            <label for="logbox">Toggle Logs</label>
-            <input class="checkbox" id="logbox" type="checkbox" checked/>
-        </div>
+        <label for="logbox">Toggle Logs</label>
+        <input class="checkbox" id="logbox" type="checkbox" checked/>
     </div>
 </body>
 <script type="module" src="js/kaleidocycle.js"></script>

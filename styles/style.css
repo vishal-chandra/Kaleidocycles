@@ -33,18 +33,18 @@ header {
   background-color: white;
 }
 
-.controls .debug p {
+.debug p {
   padding: 0;
   margin: 0;
 }
 
-.controls .debug:hover {
+.debug:hover {
   background-color: #e6b2a8;
 }
 
 .cellEditor {
   width: 100%;
-  height: 50%;
+  height: 60%;
 }
 
 .cellEditor h3 {
