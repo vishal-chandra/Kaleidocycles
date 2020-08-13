@@ -33,6 +33,11 @@ header {
   background-color: white;
 }
 
+.controls .debug p {
+  padding: 0;
+  margin: 0;
+}
+
 .controls .debug:hover {
   background-color: #e6b2a8;
 }
