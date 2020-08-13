@@ -1,0 +1,37 @@
+.cellEditor .slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  background: aliceblue;
+  outline: none;
+  -webkit-transition: 1.0s;
+  transition: 1.0s;
+}
+
+.cellEditor .slider:hover {
+  background-color: aquamarine;
+}
+
+.cellEditor .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: hotpink;
+  cursor: pointer;
+}
+
+.cellEditor button {
+  font-size: 15px;
+  background-color: aliceblue;
+  border: 0px;
+  padding: 5px;
+  border-radius: 5px;
+  -webkit-transition-duration: 0.6s;
+          transition-duration: 0.6s;
+}
+
+.cellEditor button:hover {
+  background-color: aquamarine;
+}
+/*# sourceMappingURL=ui.css.map */

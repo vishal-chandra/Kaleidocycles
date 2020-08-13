@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@1,700&display=swap');
+
+* {
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+
 html, body {
     margin: 0;
     height: 100%;
@@ -30,7 +36,8 @@ header {
         transition-duration: 0.3s;
     }
 
-    .speed, .properties, .lengthModifiers {
+    .properties, .lengthModifiers {
+        padding: 5px;
         &:hover {
             background-color: white;
         }
@@ -71,6 +78,16 @@ header {
         // animations
         transition-duration: 0.5s;
         &:hover {
+            border-color: teal;
+        }
+    }
+
+    .buttons, .sliders {
+
+        box-sizing: border-box;
+        border: 3px solid rgb(167, 180, 193);
+
+        &:hover{
             border-color: teal;
         }
     }
