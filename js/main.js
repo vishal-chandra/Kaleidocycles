@@ -3,7 +3,7 @@ import {OrbitControls} from "../lib/three/OrbitControls.js";
 import {Kaleidocycle} from "./kaleidocycle.js";
 
 let canvas, renderer, camera, controls, scene; //render tools
-let kal, u, v, w, nAlpha, eAlpha; //objects
+let u, v, w, nAlpha, eAlpha; //objects
 //animation options
 let frames = 0;
 let lastTime = 0; //time at last frame. used for speed control

@@ -39,17 +39,17 @@ export class Kaleidocycle {
         this.D = new Vector3(0, this.h/2, this.s/2);
 
         //geometry
-        baseGeometry = new Geometry();
-        baseGeometry.vertices = [
+        this.baseGeometry = new Geometry();
+        this.baseGeometry.vertices = [
             this.A, this.B, this.C, this.D
         ];
-        baseGeometry.faces.push(
+        this.baseGeometry.faces.push(
             new Face3(0,3,1), new Face3(0,1,2), 
             new Face3(1,3,2), new Face3(2,3,0)
         );
 
         //enables lighting
-        baseGeometry.computeFaceNormals();
+        this.baseGeometry.computeFaceNormals();
 
         this.colors = [0xFF0000, 0x6FFF00, 0x00E1FF, 0xFFA600, 0xD400FF, 0xEDCA18]
 
@@ -57,7 +57,7 @@ export class Kaleidocycle {
         this.tets = []
         for(let i = 0; i < this.n; i++) {
             this.tets.push(new Mesh(
-                baseGeometry, 
+                this.baseGeometry, 
                 new MeshPhongMaterial({color: this.colors[i % this.colors.length]})
             ));
         }
@@ -184,7 +184,7 @@ export class Kaleidocycle {
         this.update_M();
 
         //undo last transform
-        baseGeometry.applyMatrix4(new Matrix4().getInverse(this.transMat));
+        this.baseGeometry.applyMatrix4(new Matrix4().getInverse(this.transMat));
 
         //calc new
         this.transMat.set(
@@ -193,52 +193,52 @@ export class Kaleidocycle {
             this.u.z, this.w.z, this.v.z, this.M.z,
             0,        0,        0,        1
         );
-        baseGeometry.applyMatrix4(this.transMat);
+        this.baseGeometry.applyMatrix4(this.transMat);
     }
 
     //vertex updaters
     updateAfromLambda(lambda) {
-        baseGeometry.vertices[0].x = -lambda; //adjust
-        baseGeometry.vertices[0].y = -this.h/2; //reset to default
-        baseGeometry.vertices[0].z = 0; //reset
+        this.baseGeometry.vertices[0].x = -lambda; //adjust
+        this.baseGeometry.vertices[0].y = -this.h/2; //reset to default
+        this.baseGeometry.vertices[0].z = 0; //reset
 
         /*
         bring this vertex back to where it should be relative to the
         rest of the tetrahedron
         */
-        baseGeometry.vertices[0].applyMatrix4(this.transMat);
+        this.baseGeometry.vertices[0].applyMatrix4(this.transMat);
     }
 
     updateBfromMu(mu, lambda) {
-        baseGeometry.vertices[1].x = mu * lambda;
-        baseGeometry.vertices[1].y = -this.h/2;
-        baseGeometry.vertices[1].z = 0;
+        this.baseGeometry.vertices[1].x = mu * lambda;
+        this.baseGeometry.vertices[1].y = -this.h/2;
+        this.baseGeometry.vertices[1].z = 0;
 
-        baseGeometry.vertices[1].applyMatrix4(this.transMat);
+        this.baseGeometry.vertices[1].applyMatrix4(this.transMat);
     }
 
     updateCfromKappa(kappa) {
-        baseGeometry.vertices[2].x = 0;
-        baseGeometry.vertices[2].y = this.h/2;
-        baseGeometry.vertices[2].z = -kappa;
+        this.baseGeometry.vertices[2].x = 0;
+        this.baseGeometry.vertices[2].y = this.h/2;
+        this.baseGeometry.vertices[2].z = -kappa;
 
-        baseGeometry.vertices[2].applyMatrix4(this.transMat);
+        this.baseGeometry.vertices[2].applyMatrix4(this.transMat);
     }
 
     updateDfromNu(nu, kappa) {
-        baseGeometry.vertices[3].x = 0;
-        baseGeometry.vertices[3].y = this.h/2;
-        baseGeometry.vertices[3].z = nu * kappa;
+        this.baseGeometry.vertices[3].x = 0;
+        this.baseGeometry.vertices[3].y = this.h/2;
+        this.baseGeometry.vertices[3].z = nu * kappa;
 
-        baseGeometry.vertices[3].applyMatrix4(this.transMat);
+        this.baseGeometry.vertices[3].applyMatrix4(this.transMat);
     }
 
     setVertexFlag() {
-        baseGeometry.verticesNeedUpdate = true;
+        this.baseGeometry.verticesNeedUpdate = true;
     }
 
     destroy(scene) {
-        baseGeometry.dispose();
+        this.baseGeometry.dispose();
         this.tets.forEach(
             tet => {
                 scene.remove(tet);
