@@ -24,6 +24,7 @@ function setup() {
 
     //add controls
     orbit = new OrbitControls(camera, canvas);
+    orbit.enablePan = false;
     camera.position.add(new t.Vector3(4, 4, 4));
     orbit.update();
 
