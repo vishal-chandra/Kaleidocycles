@@ -4,7 +4,7 @@ import {TransformControls} from "../lib/three/TransformControls.js";
 import CSG from "../lib/csg/CSGMesh.js";
 
 let canvas, renderer, camera, orbit, controls, scene; //render tools
-let tet, tool, lastTet;
+let cell, tool, lastCell;
 
 setup();
 draw();
@@ -56,12 +56,11 @@ function setup() {
     scene.add(new t.AxesHelper(100));
 
     //csg components
-
-    tet = new t.Mesh(
-        new t.TetrahedronGeometry(2), 
+    cell = new t.Mesh(
+        kal.staticBaseGeometry, //this won't work because .faceVertexUVs is empty
         new t.MeshNormalMaterial({color: 0x44aa88})
     );
-    scene.add(tet);
+    scene.add(cell);
 
     tool = new t.Mesh(
         //new t.SphereGeometry(1, 15, 15),
@@ -110,12 +109,12 @@ function setup() {
         let resetButton = document.getElementById('reset');
 
         doButton.onclick = function() {
-            scene.remove(tet);
+            scene.remove(cell);
 
-            lastTet = tet.clone();
-            tet = doCSG(tet, tool, 'subtract');
+            lastCell = cell.clone();
+            cell = doCSG(cell, tool, 'subtract');
 
-            scene.add(tet);
+            scene.add(cell);
         }
 
         toggle.onclick = function() {
@@ -132,22 +131,22 @@ function setup() {
         }
 
         undoButton.onclick = function() {
-            scene.remove(tet);
+            scene.remove(cell);
 
-            tet = lastTet.clone();
+            cell = lastCell.clone();
 
-            scene.add(tet);
+            scene.add(cell);
         }
 
         resetButton.onclick = function() {
-            scene.remove(tet);
+            scene.remove(cell);
 
-            tet = new t.Mesh(
+            cell = new t.Mesh(
                 new t.TetrahedronGeometry(2), 
                 new t.MeshNormalMaterial({color: 0x44aa88})
             );
 
-            scene.add(tet);
+            scene.add(cell);
         }
     }
 }

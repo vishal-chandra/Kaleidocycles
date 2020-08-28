@@ -51,6 +51,9 @@ export class Kaleidocycle {
         //enables lighting
         this.baseGeometry.computeFaceNormals();
 
+        //a non-rotating copy for the cell editor to reference
+        this.staticBaseGeometry = this.baseGeometry.clone();
+
         this.colors = [0xFF0000, 0x6FFF00, 0x00E1FF, 0xFFA600, 0xD400FF, 0xEDCA18]
 
         //mesh array
