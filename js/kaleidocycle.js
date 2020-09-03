@@ -14,7 +14,7 @@ import {
 
 export class Kaleidocycle {
 
-    constructor(size, number, scene) {
+    constructor(size, number, customCellGeom, scene) {
         
         this.scene = scene; //used to add and remove kal from scene, and destroy it.
         
@@ -64,7 +64,7 @@ export class Kaleidocycle {
         this.tets = []
         for(let i = 0; i < this.n; i++) {
             this.tets.push(new Mesh(
-                this.baseGeometry, 
+                customCellGeom ? customCellGeom : this.baseGeometry, 
                 new MeshPhongMaterial({color: this.colors[i % this.colors.length]})
             ));
         }

@@ -40,7 +40,7 @@ function setup() {
     scene.background = new t.Color('white');
 
     //main geometry
-    kal = new Kaleidocycle(1, 8, scene);
+    kal = new Kaleidocycle(1, 8, null, scene);
     kal.addToScene(); 
 
     //lights
