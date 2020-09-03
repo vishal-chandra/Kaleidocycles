@@ -14,7 +14,10 @@ import {
 
 export class Kaleidocycle {
 
-    constructor(size, number) {
+    constructor(size, number, scene) {
+        
+        this.scene = scene; //used to add & remove kal from scene, even from the editor script
+        
         /*
             BASIC PROPERTIES
         */
@@ -241,12 +244,12 @@ export class Kaleidocycle {
         this.baseGeometry.verticesNeedUpdate = true;
     }
 
-    addToScene(scene) {
-        this.tets.forEach(tet => scene.add(tet));
+    addToScene() {
+        this.tets.forEach(tet => this.scene.add(tet));
     }
 
-    removeFromScene(scene) {
-        this.tets.forEach(tet => scene.remove(tet));
+    removeFromScene() {
+        this.tets.forEach(tet => this.scene.remove(tet));
     }
 
     destroy(scene) {

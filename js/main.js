@@ -40,8 +40,8 @@ function setup() {
     scene.background = new t.Color('white');
 
     //main geometry
-    kal = new Kaleidocycle(1, 8);
-    kal.addToScene(scene); 
+    kal = new Kaleidocycle(1, 8, scene);
+    kal.addToScene(); 
 
     //lights
     const frontLight = new t.SpotLight(0xFFFFFF);
@@ -88,7 +88,7 @@ function setup() {
             
             kal.destroy(scene);
             kal = new Kaleidocycle(1, nSlider.value);
-            kal.addToScene(scene); 
+            kal.addToScene(); 
         }
     );
 

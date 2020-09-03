@@ -107,6 +107,7 @@ function setup() {
         let toggle = document.getElementById('toggle');
         let undoButton = document.getElementById('undo');
         let resetButton = document.getElementById('reset');
+        let createButton = document.getElementById('create');
 
         doButton.onclick = function() {
             scene.remove(cell);
@@ -147,6 +148,10 @@ function setup() {
             );
 
             scene.add(cell);
+        }
+
+        createButton.onclick = function() {
+            kal.removeFromScene();
         }
     }
 }
