@@ -16,7 +16,7 @@ export class Kaleidocycle {
 
     constructor(size, number, scene) {
         
-        this.scene = scene; //used to add & remove kal from scene, even from the editor script
+        this.scene = scene; //used to add and remove kal from scene, and destroy it.
         
         /*
             BASIC PROPERTIES
@@ -252,11 +252,11 @@ export class Kaleidocycle {
         this.tets.forEach(tet => this.scene.remove(tet));
     }
 
-    destroy(scene) {
+    destroy() {
         this.baseGeometry.dispose();
         this.tets.forEach(
             tet => {
-                scene.remove(tet);
+                this.scene.remove(tet);
                 tet.material.dispose(); 
             }
         );

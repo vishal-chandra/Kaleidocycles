@@ -86,8 +86,8 @@ function setup() {
         'change', function() {
             document.getElementById('nLabel').innerHTML = 'N=' + nSlider.value;
             
-            kal.destroy(scene);
-            kal = new Kaleidocycle(1, nSlider.value);
+            kal.destroy();
+            kal = new Kaleidocycle(1, nSlider.value, scene);
             kal.addToScene(); 
         }
     );

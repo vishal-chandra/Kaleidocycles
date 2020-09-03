@@ -4,7 +4,7 @@ import {TransformControls} from "../lib/three/TransformControls.js";
 import CSG from "../lib/csg/CSGMesh.js";
 
 let canvas, renderer, camera, orbit, controls, scene; //render tools
-let cell, tool, lastCell;
+let tool, lastCell; //cell is a shared var define in index.html
 
 setup();
 draw();
@@ -107,7 +107,6 @@ function setup() {
         let toggle = document.getElementById('toggle');
         let undoButton = document.getElementById('undo');
         let resetButton = document.getElementById('reset');
-        let createButton = document.getElementById('create');
 
         doButton.onclick = function() {
             scene.remove(cell);
@@ -148,10 +147,6 @@ function setup() {
             );
 
             scene.add(cell);
-        }
-
-        createButton.onclick = function() {
-            kal.removeFromScene();
         }
     }
 }

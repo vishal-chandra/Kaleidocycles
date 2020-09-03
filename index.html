@@ -101,7 +101,11 @@
         <input class="checkbox" id="logbox" type="checkbox" checked/>
     </div>
 </body>
-<script>var kal = null;</script>
+<script>
+    //shared variables between main and editor
+    var kal = null; //the kaleidocycle object
+    var cell = null; //the mesh in the editor; geometry can be extracted.
+</script>
 <script type="module" src="js/kaleidocycle.js"></script>
 <script type="module" src="js/main.js"></script>
 <script type="module" src="js/editor.js"></script>
