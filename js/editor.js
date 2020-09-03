@@ -63,8 +63,8 @@ function setup() {
     scene.add(cell);
 
     tool = new t.Mesh(
-        //new t.SphereGeometry(1, 15, 15),
-        new t.BoxGeometry(0.5, 0.5, 0.5),
+        new t.SphereGeometry(0.3, 15, 15),
+        //new t.BoxGeometry(0.5, 0.5, 0.5),
         //new t.DodecahedronGeometry(1),
         //new t.CylinderGeometry(0.5, 0.5, 4, 15),
         new t.MeshStandardMaterial({color: 0x918c8c})
