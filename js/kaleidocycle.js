@@ -58,13 +58,14 @@ export class Kaleidocycle {
         //a non-rotating copy for the cell editor to reference
         this.staticBaseGeometry = this.baseGeometry.clone();
 
-        this.colors = [0xFF0000, 0x6FFF00, 0x00E1FF, 0xFFA600, 0xD400FF, 0xEDCA18]
+        this.cellGeometry = customCellGeom ? customCellGeom : this.baseGeometry;
 
         //mesh array
+        this.colors = [0xFF0000, 0x6FFF00, 0x00E1FF, 0xFFA600, 0xD400FF, 0xEDCA18]
         this.tets = []
         for(let i = 0; i < this.n; i++) {
             this.tets.push(new Mesh(
-                customCellGeom ? customCellGeom : this.baseGeometry, 
+                this.cellGeometry, 
                 new MeshPhongMaterial({color: this.colors[i % this.colors.length]})
             ));
         }
@@ -191,7 +192,7 @@ export class Kaleidocycle {
         this.update_M();
 
         //undo last transform
-        this.baseGeometry.applyMatrix4(new Matrix4().getInverse(this.transMat));
+        this.cellGeometry.applyMatrix4(new Matrix4().getInverse(this.transMat));
 
         //calc new
         this.transMat.set(
@@ -200,7 +201,7 @@ export class Kaleidocycle {
             this.u.z, this.w.z, this.v.z, this.M.z,
             0,        0,        0,        1
         );
-        this.baseGeometry.applyMatrix4(this.transMat);
+        this.cellGeometry.applyMatrix4(this.transMat);
     }
 
     //vertex updaters
@@ -254,6 +255,9 @@ export class Kaleidocycle {
 
     destroy() {
         this.baseGeometry.dispose();
+        this.staticBaseGeometry.dispose();
+        this.cellGeometry.dispose();
+
         this.tets.forEach(
             tet => {
                 this.scene.remove(tet);

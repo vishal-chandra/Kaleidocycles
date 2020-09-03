@@ -81,78 +81,86 @@ function setup() {
 
 
     //EVENT LISTENERS
-    let nSlider = document.getElementById('nSlider');
-    nSlider.addEventListener(
-        'change', function() {
-            document.getElementById('nLabel').innerHTML = 'N=' + nSlider.value;
-            
+    {
+        let nSlider = document.getElementById('nSlider');
+        let checkbox1 = document.getElementById('checkbox1');
+        let speedSlider = document.getElementById('speedSlider');
+
+        let lambdaSlider = document.getElementById('lambdaSlider');
+        let muSlider = document.getElementById('muSlider');
+        let kappaSlider = document.getElementById('kappaSlider');
+        let nuSlider = document.getElementById('nuSlider');
+
+        let createButton = document.getElementById('create');
+
+        nSlider.addEventListener(
+            'change', function() {
+                document.getElementById('nLabel').innerHTML = 'N=' + nSlider.value;
+                
+                kal.destroy();
+                kal = new Kaleidocycle(1, nSlider.value, null, scene);
+                kal.addToScene(); 
+            }
+        );
+
+        checkbox1.addEventListener(
+            'change', function() {
+                let show = checkbox1.checked;
+                u.visible = show;
+                v.visible = show;
+                w.visible = show;
+                nAlpha.visible = show;
+                eAlpha.visible = show;
+            }
+        );
+
+        speedSlider.addEventListener(
+            'input', function() {
+                rotationSpeed = speedSlider.value;
+            }
+        );
+
+        lambdaSlider.addEventListener(
+            'input', function() {
+                
+                kal.updateAfromLambda(lambdaSlider.value);
+                /*
+                since mu is a percentage of lambda, both A and B are
+                dependent on lambda
+                */
+                kal.updateBfromMu(muSlider.value, lambdaSlider.value);
+                kal.setVertexFlag();
+            }
+        );
+
+        muSlider.addEventListener(
+            'input', function() {
+                kal.updateBfromMu(muSlider.value, lambdaSlider.value);
+                kal.setVertexFlag();
+            }
+        );
+
+        kappaSlider.addEventListener(
+            'input', function() {
+                kal.updateCfromKappa(kappaSlider.value);
+                kal.updateDfromNu(nuSlider.value, kappaSlider.value);
+                kal.setVertexFlag();
+            }
+        );
+
+        nuSlider.addEventListener(
+            'input', function() {
+                kal.updateDfromNu(nuSlider.value, kappaSlider.value);
+                kal.setVertexFlag();
+            }
+        );
+
+        createButton.onclick = function() {
             kal.destroy();
-            kal = new Kaleidocycle(1, nSlider.value, scene);
-            kal.addToScene(); 
+            kal = new Kaleidocycle(1, nSlider.value, cell.geometry.clone(), scene);
+            kal.addToScene();
         }
-    );
-
-
-    let checkbox1 = document.getElementById('checkbox1');
-    checkbox1.addEventListener(
-        'change', function() {
-            let show = checkbox1.checked;
-            u.visible = show;
-            v.visible = show;
-            w.visible = show;
-            nAlpha.visible = show;
-            eAlpha.visible = show;
-        }
-    );
-
-    let speedSlider = document.getElementById('speedSlider');
-    speedSlider.addEventListener(
-        'input', function() {
-            rotationSpeed = speedSlider.value;
-        }
-    );
-
-    let lambdaSlider = document.getElementById('lambdaSlider');
-    let muSlider = document.getElementById('muSlider');
-    let kappaSlider = document.getElementById('kappaSlider');
-    let nuSlider = document.getElementById('nuSlider');
-
-    lambdaSlider.addEventListener(
-        'input', function() {
-            
-            kal.updateAfromLambda(lambdaSlider.value);
-            /*
-            since mu is a percentage of lambda, both A and B are
-            dependent on lambda
-            */
-            kal.updateBfromMu(muSlider.value, lambdaSlider.value);
-            kal.setVertexFlag();
-        }
-    );
-
-    muSlider.addEventListener(
-        'input', function() {
-            kal.updateBfromMu(muSlider.value, lambdaSlider.value);
-            kal.setVertexFlag();
-        }
-    );
-
-    kappaSlider.addEventListener(
-        'input', function() {
-            kal.updateCfromKappa(kappaSlider.value);
-            kal.updateDfromNu(nuSlider.value, kappaSlider.value);
-            kal.setVertexFlag();
-        }
-    );
-
-    nuSlider.addEventListener(
-        'input', function() {
-            kal.updateDfromNu(nuSlider.value, kappaSlider.value);
-            kal.setVertexFlag();
-        }
-    );
-
-
+    }
 }
 
 /**
