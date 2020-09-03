@@ -55,9 +55,29 @@ function setup() {
     scene.add(new t.AxesHelper(100));
 
     //csg components
+    let geometry = new t.Geometry();
+    geometry.vertices.push(new t.Vector3(2, 2, 2), new t.Vector3(-1, -1, 1), new t.Vector3(-1, 1, -1), new t.Vector3(1, -1, -1));
+    geometry.faces.push(new t.Face3(2, 1, 0), new t.Face3(0, 3, 2), new t.Face3(1, 3, 0), new t.Face3(2, 3, 1));
+    geometry.computeBoundingBox();
+    const max = geometry.boundingBox.max;
+    const min = geometry.boundingBox.min;
+    const offset = new t.Vector2(0 - min.x, 0 - min.y);
+    const range = new t.Vector2(max.x - min.x, max.y - min.y);
+    for (let i = 0; i < geometry.faces.length; i++) {
+        const v1 = geometry.vertices[geometry.faces[i].a];
+        const v2 = geometry.vertices[geometry.faces[i].b];
+        const v3 = geometry.vertices[geometry.faces[i].c];
+        geometry.faceVertexUvs[0].push([
+            new t.Vector2((v1.x + offset.x) / range.x, (v1.y + offset.y) / range.y),
+            new t.Vector2((v2.x + offset.x) / range.x, (v2.y + offset.y) / range.y),
+            new t.Vector2((v3.x + offset.x) / range.x, (v3.y + offset.y) / range.y)
+        ]);
+    }
+    geometry.computeFlatVertexNormals();
+
 
     tet = new t.Mesh(
-        new t.TetrahedronGeometry(2), 
+        geometry, 
         new t.MeshNormalMaterial({color: 0x44aa88})
     );
     scene.add(tet);

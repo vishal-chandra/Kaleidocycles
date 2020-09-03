@@ -4,6 +4,7 @@
 
 import {
     Vector3,
+    Vector2,
     Geometry,
     Face3,
     Mesh,
@@ -248,5 +249,24 @@ export class Kaleidocycle {
                 tet.material.dispose(); 
             }
         );
+    }
+
+    computeUvs(geometry) {
+        geometry.computeBoundingBox();
+        const max = geometry.boundingBox.max;
+        const min = geometry.boundingBox.min;
+        const offset = new Vector2(0 - min.x, 0 - min.y);
+        const range = new Vector2(max.x - min.x, max.y - min.y);
+        for (let i = 0; i < geometry.faces.length; i++) {
+            const v1 = geometry.vertices[geometry.faces[i].a];
+            const v2 = geometry.vertices[geometry.faces[i].b];
+            const v3 = geometry.vertices[geometry.faces[i].c];
+            geometry.faceVertexUvs[0].push([
+                new Vector2((v1.x + offset.x) / range.x, (v1.y + offset.y) / range.y),
+                new Vector2((v2.x + offset.x) / range.x, (v2.y + offset.y) / range.y),
+                new Vector2((v3.x + offset.x) / range.x, (v3.y + offset.y) / range.y)
+            ]);
+        }
+        geometry.computeFlatVertexNormals();
     }
 }
