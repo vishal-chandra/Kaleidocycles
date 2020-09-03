@@ -41,7 +41,7 @@ function setup() {
 
     //main geometry
     kal = new Kaleidocycle(1, 8);
-    kal.tets.forEach(tet => scene.add(tet)); 
+    kal.addToScene(scene); 
 
     //lights
     const frontLight = new t.SpotLight(0xFFFFFF);
@@ -88,7 +88,7 @@ function setup() {
             
             kal.destroy(scene);
             kal = new Kaleidocycle(1, nSlider.value);
-            kal.tets.forEach(tet => scene.add(tet)); 
+            kal.addToScene(scene); 
         }
     );
 

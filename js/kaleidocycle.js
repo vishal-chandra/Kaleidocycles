@@ -241,6 +241,14 @@ export class Kaleidocycle {
         this.baseGeometry.verticesNeedUpdate = true;
     }
 
+    addToScene(scene) {
+        this.tets.forEach(tet => scene.add(tet));
+    }
+
+    removeFromScene(scene) {
+        this.tets.forEach(tet => scene.remove(tet));
+    }
+
     destroy(scene) {
         this.baseGeometry.dispose();
         this.tets.forEach(
