@@ -6,6 +6,9 @@ import CSG from "../lib/csg/CSGMesh.js";
 let canvas, renderer, camera, orbit, controls, scene; //render tools
 let tet, tool, lastTet;
 
+//csg tracking
+let csgOps = 0;
+
 setup();
 draw();
 
@@ -64,7 +67,7 @@ function setup() {
         new t.Face3(2, 1, 0), new t.Face3(0, 3, 2), 
         new t.Face3(1, 3, 0), new t.Face3(2, 3, 1)
     );
-    computeUvs(geometry);
+    geometry.computeFaceNormals();
 
     tet = new t.Mesh(
         geometry, 
@@ -118,9 +121,12 @@ function setup() {
             scene.remove(tet);
 
             lastTet = tet.clone();
+            if(csgOps == 0) computeUvs(tet.geometry);
             tet = doCSG(tet, tool, 'subtract');
 
             scene.add(tet);
+
+            csgOps++;
         }
 
         let toolToggle = document.getElementById('toolToggle');
@@ -139,6 +145,8 @@ function setup() {
             tet = lastTet.clone();
 
             scene.add(tet);
+
+            csgOps--;
         }
 
         let resetButton = document.getElementById('resetCSG');
@@ -151,6 +159,8 @@ function setup() {
             );
 
             scene.add(tet);
+
+            csgOps = 0;
         }
     }
 }
