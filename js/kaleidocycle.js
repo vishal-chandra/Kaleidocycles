@@ -41,16 +41,16 @@ export class Kaleidocycle {
 
         //geometry
         this.baseGeometry = new Geometry();
-        this.baseGeometry.vertices = [
+        this.baseGeometry.vertices.push(
             this.A, this.B, this.C, this.D
-        ];
-        this.baseGeometry.faces.push(
-            new Face3(0,3,1), new Face3(0,1,2), 
-            new Face3(1,3,2), new Face3(2,3,0)
         );
-
-        //enables lighting
-        this.baseGeometry.computeFaceNormals();
+        this.baseGeometry.faces.push(
+            new Face3(0, 1, 3), //ABD
+            new Face3(0, 2, 1), //ACB
+            new Face3(1, 2, 3), //BCD
+            new Face3(2, 0, 3)  //CAD
+        );
+        this.computeUvs(this.baseGeometry);
 
         //a non-rotating copy for the cell editor to reference
         this.staticBaseGeometry = this.baseGeometry.clone();
