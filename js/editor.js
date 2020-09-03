@@ -142,7 +142,7 @@ function setup() {
             scene.remove(cell);
 
             cell = new t.Mesh(
-                new t.TetrahedronGeometry(2), 
+                kal.staticBaseGeometry, 
                 new t.MeshNormalMaterial({color: 0x44aa88})
             );
 
