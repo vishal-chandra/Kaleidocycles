@@ -111,7 +111,7 @@ header {
 }
 
 .cellEditor .slider:hover {
-  background-color: aquamarine;
+  background-color: #d0d0d0;
 }
 
 .cellEditor .slider::-webkit-slider-thumb {
@@ -119,8 +119,19 @@ header {
   appearance: none;
   width: 20px;
   height: 20px;
-  background: hotpink;
   cursor: pointer;
+}
+
+#toolX::-webkit-slider-thumb {
+  background: red;
+}
+
+#toolY::-webkit-slider-thumb {
+  background: #5ef75e;
+}
+
+#toolZ::-webkit-slider-thumb {
+  background: blue;
 }
 
 .cellEditor button {

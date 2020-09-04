@@ -8,18 +8,29 @@
     transition: 1.0s;
 
     &:hover{
-        background-color: aquamarine;
+        background-color: rgb(208, 208, 208);
     }
 
     &::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
         width: 20px;
-        height: 20px; 
-        background: hotpink;
+        height: 20px;
         cursor: pointer;
     }
+}
 
+//corresponding to axis colors
+#toolX::-webkit-slider-thumb {
+    background: red;
+}
+
+#toolY::-webkit-slider-thumb {
+    background: rgb(94, 247, 94);
+}
+
+#toolZ::-webkit-slider-thumb {
+    background: blue;
 }
 
 .cellEditor button {
