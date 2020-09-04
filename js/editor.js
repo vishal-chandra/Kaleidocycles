@@ -20,7 +20,7 @@ function setup() {
      * RENDERING BOILERPLATE
      * -----------------------
      */
-    renderer = new t.WebGLRenderer({canvas: document.querySelector('#canvas2')});
+    renderer = new t.WebGLRenderer({canvas: document.querySelector('#canvas2'), antialias: true});
     canvas = renderer.domElement; //this is the same as selecting from doc
     camera = new t.PerspectiveCamera(45, 2, 0.1, 100);
 
