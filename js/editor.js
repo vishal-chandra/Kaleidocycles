@@ -25,7 +25,7 @@ function setup() {
     //add controls
     orbit = new OrbitControls(camera, canvas);
     orbit.enablePan = false;
-    camera.position.add(new t.Vector3(3, 2, 3));
+    camera.position.add(new t.Vector3(2.5, 1, 1.5));
     orbit.update();
 
     controls = new TransformControls(camera, renderer.domElement);
@@ -69,7 +69,7 @@ function setup() {
         //new t.CylinderGeometry(0.5, 0.5, 4, 15),
         new t.MeshStandardMaterial({color: 0x918c8c})
     );
-    tool.position.x = 1.5;
+    tool.position.x = 1.2;
     scene.add(tool);
 
     //attach and add
