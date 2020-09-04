@@ -8,7 +8,7 @@
     transition: 1.0s;
 
     &:hover{
-        background-color: rgb(208, 208, 208);
+        background-color: rgb(189, 195, 199);
     }
 
     &::-webkit-slider-thumb {
@@ -47,6 +47,6 @@
     transition-duration: 0.6s;
 
     &:hover{
-        background-color: aquamarine;
+        background-color: rgb(189, 195, 199);
     }
 }

@@ -77,7 +77,7 @@ header {
 }
 
 .cellEditor #canvas2:hover {
-  border-color: teal;
+  border-color: #86898c;
 }
 
 .cellEditor .buttons, .cellEditor .sliders, .cellEditor .toolPick {
@@ -87,7 +87,7 @@ header {
 }
 
 .cellEditor .buttons:hover, .cellEditor .sliders:hover, .cellEditor .toolPick:hover {
-  border-color: teal;
+  border-color: #86898c;
 }
 
 .cellEditor .sliders {
@@ -111,7 +111,7 @@ header {
 }
 
 .cellEditor .slider:hover {
-  background-color: #d0d0d0;
+  background-color: #bdc3c7;
 }
 
 .cellEditor .slider::-webkit-slider-thumb {
@@ -147,6 +147,6 @@ header {
 }
 
 .cellEditor button:hover {
-  background-color: aquamarine;
+  background-color: #bdc3c7;
 }
 /*# sourceMappingURL=main.css.map */
