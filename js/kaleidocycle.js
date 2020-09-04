@@ -208,6 +208,7 @@ export class Kaleidocycle {
     updateAfromLambda(lambda) {
         //adjust x, reset y and z to default
         this.baseGeometry.vertices[0].set(-lambda, -this.h/2, 0);
+        this.staticBaseGeometry.vertices[0].set(-lambda, -this.h/2, 0);
 
         /*
         bring this vertex back to where it should be relative to the
@@ -218,24 +219,28 @@ export class Kaleidocycle {
 
     updateBfromMu(mu, lambda) {
         this.baseGeometry.vertices[1].set(mu * lambda, -this.h/2, 0);
+        this.staticBaseGeometry.vertices[1].set(mu * lambda, -this.h/2, 0);
 
         this.baseGeometry.vertices[1].applyMatrix4(this.transMat);
     }
 
     updateCfromKappa(kappa) {
         this.baseGeometry.vertices[2].set(0, this.h/2, -kappa);
+        this.staticBaseGeometry.vertices[2].set(0, this.h/2, -kappa);
 
         this.baseGeometry.vertices[2].applyMatrix4(this.transMat);
     }
 
     updateDfromNu(nu, kappa) {
         this.baseGeometry.vertices[3].set(0, this.h/2, nu * kappa);
+        this.staticBaseGeometry.vertices[3].set(0, this.h/2, nu * kappa);
 
         this.baseGeometry.vertices[3].applyMatrix4(this.transMat);
     }
 
     setVertexFlag() {
         this.baseGeometry.verticesNeedUpdate = true;
+        this.staticBaseGeometry.verticesNeedUpdate = true;
     }
 
     addToScene() {
