@@ -6,6 +6,8 @@ import CSG from "../lib/csg/CSGMesh.js";
 let canvas, renderer, camera, orbit, controls, scene; //render tools
 let tool, lastCell; //cell is a shared var define in index.html
 
+let sphereGeom, cubeGeom, cylinderGeom, coneGeom;
+
 setup();
 draw();
 
@@ -62,11 +64,13 @@ function setup() {
     );
     scene.add(cell);
 
+    sphereGeom = new t.SphereGeometry(0.3, 15, 15);
+    cubeGeom = new t.BoxGeometry(0.5, 0.5, 0.5);
+    cylinderGeom = new t.CylinderGeometry(0.25, 0.25, 1, 10);
+    coneGeom = new t.ConeGeometry(0.25, 1, 10);
+
     tool = new t.Mesh(
-        new t.SphereGeometry(0.3, 15, 15),
-        //new t.BoxGeometry(0.5, 0.5, 0.5),
-        //new t.DodecahedronGeometry(1),
-        //new t.CylinderGeometry(0.5, 0.5, 4, 15),
+        sphereGeom,
         new t.MeshStandardMaterial({color: 0x918c8c})
     );
     tool.position.x = 1.2;
@@ -108,6 +112,11 @@ function setup() {
         let undoButton = document.getElementById('undo');
         let resetButton = document.getElementById('reset');
 
+        let sphereGeomButton = document.getElementById('sphere');
+        let cubeGeomButton = document.getElementById('cube');
+        let cylinderGeomButton = document.getElementById('cyl');
+        let coneGeomButton = document.getElementById('cone');
+
         doButton.onclick = function() {
             scene.remove(cell);
 
@@ -148,6 +157,31 @@ function setup() {
 
             scene.add(cell);
         }
+
+        sphereGeomButton.onclick = function() {
+            scene.remove(tool);
+            tool.geometry = sphereGeom;
+            scene.add(tool);
+        }
+
+        cubeGeomButton.onclick = function() {
+            scene.remove(tool);
+            tool.geometry = cubeGeom;
+            scene.add(tool);
+        }
+
+        cylinderGeomButton.onclick = function() {
+            scene.remove(tool);
+            tool.geometry = cylinderGeom;
+            scene.add(tool);
+        }
+
+        coneGeomButton.onclick = function() {
+            scene.remove(tool);
+            tool.geometry = coneGeom;
+            scene.add(tool);
+        }
+
     }
 }
 
