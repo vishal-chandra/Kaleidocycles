@@ -206,9 +206,8 @@ export class Kaleidocycle {
 
     //vertex updaters
     updateAfromLambda(lambda) {
-        this.baseGeometry.vertices[0].x = -lambda; //adjust
-        this.baseGeometry.vertices[0].y = -this.h/2; //reset to default
-        this.baseGeometry.vertices[0].z = 0; //reset
+        //adjust x, reset y and z to default
+        this.baseGeometry.vertices[0].set(-lambda, -this.h/2, 0);
 
         /*
         bring this vertex back to where it should be relative to the
@@ -218,25 +217,19 @@ export class Kaleidocycle {
     }
 
     updateBfromMu(mu, lambda) {
-        this.baseGeometry.vertices[1].x = mu * lambda;
-        this.baseGeometry.vertices[1].y = -this.h/2;
-        this.baseGeometry.vertices[1].z = 0;
+        this.baseGeometry.vertices[1].set(mu * lambda, -this.h/2, 0);
 
         this.baseGeometry.vertices[1].applyMatrix4(this.transMat);
     }
 
     updateCfromKappa(kappa) {
-        this.baseGeometry.vertices[2].x = 0;
-        this.baseGeometry.vertices[2].y = this.h/2;
-        this.baseGeometry.vertices[2].z = -kappa;
+        this.baseGeometry.vertices[2].set(0, this.h/2, -kappa);
 
         this.baseGeometry.vertices[2].applyMatrix4(this.transMat);
     }
 
     updateDfromNu(nu, kappa) {
-        this.baseGeometry.vertices[3].x = 0;
-        this.baseGeometry.vertices[3].y = this.h/2;
-        this.baseGeometry.vertices[3].z = nu * kappa;
+        this.baseGeometry.vertices[3].set(0, this.h/2, nu * kappa);
 
         this.baseGeometry.vertices[3].applyMatrix4(this.transMat);
     }
