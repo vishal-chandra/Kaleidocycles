@@ -147,15 +147,8 @@ function setup() {
             scene.add(cell);
         }
 
-        resetButton.onclick = function() {
-            scene.remove(cell);
-
-            cell = new t.Mesh(
-                kal.staticBaseGeometry, 
-                new t.MeshNormalMaterial({color: 0x44aa88})
-            );
-
-            scene.add(cell);
+        resetButton.onclick = function(){
+            resetCell();
         }
 
         sphereGeomButton.onclick = function() {
@@ -182,7 +175,19 @@ function setup() {
             scene.add(tool);
         }
 
+        /*n=6 special case;
+        this cell has different base dims than the others; must reset
+        */
+        let nSlider = document.getElementById("nSlider");
+        nSlider.addEventListener(
+            "change", function() {
+                resetCell();
+                //confirm("beware! you will lose your cell sculpture");
+            }
+        );
+
     }
+    resetCell()
 }
 
 function draw() {
@@ -223,6 +228,17 @@ function draw() {
 
     requestAnimationFrame(loop); //kick off loop
 
+}
+
+function resetCell() {
+    scene.remove(cell);
+
+    cell = new t.Mesh(
+        kal.staticBaseGeometry, 
+        new t.MeshNormalMaterial({color: 0x44aa88})
+    );
+
+    scene.add(cell);
 }
 
 function doCSG(meshA, meshB, operation){
