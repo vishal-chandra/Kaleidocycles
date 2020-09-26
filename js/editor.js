@@ -178,7 +178,7 @@ function setup() {
 
         /* TOOL MODE RADIO BUTTONS*/
         $('input[type=radio][name=toolControl]').change(function() {
-            console.log(this.value);
+            controls.setMode(this.value);
         });
 
         /*n=6 special case;
