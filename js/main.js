@@ -5,6 +5,7 @@ import {Kaleidocycle} from "./kaleidocycle.js";
 let canvas, renderer, camera, controls, scene; //render tools
 let u, v, w, nAlpha, eAlpha; //objects
 //animation options
+let stopped = false; //stopped by click
 let frames = 0;
 let lastTime = 0; //time at last frame. used for speed control
 let rotationSpeed = 1; //rotation speed as a multiple of time
@@ -27,6 +28,7 @@ function setup() {
 
     //add controls
     controls = new OrbitControls(camera, canvas);
+    controls.enablePan = false;
     camera.position.z = 4;
     controls.update();
 
@@ -116,6 +118,7 @@ function setup() {
 
         speedSlider.addEventListener(
             'input', function() {
+                stopped = false;
                 rotationSpeed = speedSlider.value;
             }
         );
@@ -160,6 +163,12 @@ function setup() {
             kal = new Kaleidocycle(1, nSlider.value, cell.geometry.clone(), scene);
             kal.addToScene();
         }
+
+        $('#canvas').mousedown( function(event) {
+            if(event.which == 3) {
+                stopped = !stopped;
+            }
+        });
     }
 }
 
@@ -190,7 +199,7 @@ function draw() {
         */
         frames++;
         time *= 0.001; //ms to s
-        kal.time += rotationSpeed * (lastTime - time);
+        if(!stopped) kal.time += rotationSpeed * (lastTime - time);
         kal.transform();
         updateArrows();
 
