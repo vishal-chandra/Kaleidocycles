@@ -85,6 +85,7 @@ function setup() {
         EVENT LISTENERS
     */
     {
+        /* SLIDERS */
         let toolXSlider = document.getElementById('toolX');
         toolXSlider.addEventListener(
             'input', function() {
@@ -106,7 +107,7 @@ function setup() {
             }
         );
 
-        //buttons
+        /* ACTION BUTTONS*/
         let doButton = document.getElementById('do');
         let toggle = document.getElementById('toggle');
         let undoButton = document.getElementById('undo');
@@ -174,6 +175,11 @@ function setup() {
             tool.geometry = coneGeom;
             scene.add(tool);
         }
+
+        /* TOOL MODE RADIO BUTTONS*/
+        $('input[type=radio][name=toolControl]').change(function() {
+            console.log(this.value);
+        });
 
         /*n=6 special case;
         this cell has different base dims than the others; must reset
