@@ -53,7 +53,7 @@ header {
 
 .cellEditor {
   width: 100%;
-  height: 40%;
+  height: 33%;
   display: inline-block;
 }
 
@@ -80,13 +80,13 @@ header {
   border-color: #86898c;
 }
 
-.cellEditor .buttons, .cellEditor .sliders, .cellEditor .toolPick {
+.cellEditor div {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   border: 3px solid #a7b4c1;
 }
 
-.cellEditor .buttons:hover, .cellEditor .sliders:hover, .cellEditor .toolPick:hover {
+.cellEditor div:hover {
   border-color: #86898c;
 }
 
@@ -98,6 +98,18 @@ header {
 .cellEditor .toolPick {
   width: 40%;
   float: right;
+}
+
+.cellEditor .toolControlMode {
+  width: 100%;
+  display: inline-block;
+}
+
+.cellEditor .toolControlMode div {
+  border: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .cellEditor .slider {
