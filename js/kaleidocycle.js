@@ -134,16 +134,18 @@ export class Kaleidocycle {
         this.updateAfromLambda(lambdaSlider.value);
 
         let muSlider = document.getElementById('muSlider');
+        muSlider.max = lambdaSlider.max;
         muSlider.value = lambdaSlider.value;
         this.updateBfromMu(muSlider.value, lambdaSlider.value);
 
         let kappaSlider = document.getElementById('kappaSlider');
-        kappaSlider.max = this.h / Math.tan(this.alpha);
-        kappaSlider.value = this.n == 6 ? kappaSlider.max : this.s / 2;
+        kappaSlider.max = lambdaSlider.max;
+        kappaSlider.value = lambdaSlider.value;
         this.updateCfromKappa(kappaSlider.value);
 
         let nuSlider = document.getElementById('nuSlider');
-        nuSlider.value = kappaSlider.value;
+        nuSlider.max = lambdaSlider.max;
+        nuSlider.value = lambdaSlider.value;
         this.updateDfromNu(nuSlider.value, kappaSlider.value);
     }
 
