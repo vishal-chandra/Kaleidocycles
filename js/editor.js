@@ -189,6 +189,10 @@ function setup() {
             a.remove();
         });
 
+        $('#load').click( function() {
+            $("#uploader").click();
+        });
+
         /* TOOL MODE RADIO BUTTONS*/
         $('input[type=radio][name=toolControl]').change(function() {
             controls.setMode(this.value);
