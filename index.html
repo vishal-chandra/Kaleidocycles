@@ -36,36 +36,27 @@
 
         <div class='lengthModifiers'>
             <p>
-                <strong>Length Modifiers</strong> <br>
+                <strong>Move Corners</strong> <br>
                 <!-- λ,κ ∈ [0, h/tan(α)] (OP) <br>
                 μ ∈ [-1, 1] <br>
                 v ∈ [-1, 1] <br> -->
                 <!-- TODO: Make this tooltip -->
             </p>
 
-            <label for="lambdaSlider" id="lambdaLabel">λ</label>
+            <label for="lambdaSlider" id="lambdaLabel">1</label>
             <input class="slider" id="lambdaSlider" type="range" min="0" max="1" step="any" value="0">
 
-            <label for="muSlider" id="muLabel">μ</label>
-            <input class="slider" id="muSlider" type="range" min="-1" max="1" step="any" value="1" list='muTicks'>
-            <datalist id="muTicks">
-                <option value="-1">-1</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-            </datalist>
+            <label for="muSlider" id="muLabel">2</label>
+            <input class="slider" id="muSlider" type="range" min="0" max="1" step="any" value="0">
 
             <br>
 
-            <label for="kappaSlider" id="kappaLabel">κ</label>
+            <label for="kappaSlider" id="kappaLabel">3</label>
             <input class="slider" id="kappaSlider" type="range" min="0" max="1" step="any" value="0">
 
-            <label for="nuSlider" id="nuLabel">ν</label>
-            <input class="slider" id="nuSlider" type="range" min="-1" max="1" step="any" value="1" list="nuTicks">
-            <datalist id="nuTicks">
-                <option value="-1">-1</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-            </datalist>
+            <label for="nuSlider" id="nuLabel">4</label>
+            <input class="slider" id="nuSlider" type="range" min="0" max="1" step="any" value="0">
+            
         </div>
 
         <div class="cellEditor">

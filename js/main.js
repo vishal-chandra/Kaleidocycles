@@ -125,20 +125,14 @@ function setup() {
 
         lambdaSlider.addEventListener(
             'input', function() {
-                
                 kal.updateAfromLambda(lambdaSlider.value);
-                /*
-                since mu is a percentage of lambda, both A and B are
-                dependent on lambda
-                */
-                kal.updateBfromMu(muSlider.value, lambdaSlider.value);
                 kal.setVertexFlag();
             }
         );
 
         muSlider.addEventListener(
             'input', function() {
-                kal.updateBfromMu(muSlider.value, lambdaSlider.value);
+                kal.updateBfromMu(muSlider.value);
                 kal.setVertexFlag();
             }
         );
@@ -146,14 +140,13 @@ function setup() {
         kappaSlider.addEventListener(
             'input', function() {
                 kal.updateCfromKappa(kappaSlider.value);
-                kal.updateDfromNu(nuSlider.value, kappaSlider.value);
                 kal.setVertexFlag();
             }
         );
 
         nuSlider.addEventListener(
             'input', function() {
-                kal.updateDfromNu(nuSlider.value, kappaSlider.value);
+                kal.updateDfromNu(nuSlider.value);
                 kal.setVertexFlag();
             }
         );

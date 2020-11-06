@@ -134,7 +134,7 @@ export class Kaleidocycle {
         this.updateAfromLambda(lambdaSlider.value);
 
         let muSlider = document.getElementById('muSlider');
-        muSlider.value = 1;
+        muSlider.value = lambdaSlider.value;
         this.updateBfromMu(muSlider.value, lambdaSlider.value);
 
         let kappaSlider = document.getElementById('kappaSlider');
@@ -143,7 +143,7 @@ export class Kaleidocycle {
         this.updateCfromKappa(kappaSlider.value);
 
         let nuSlider = document.getElementById('nuSlider');
-        nuSlider.value = 1;
+        nuSlider.value = kappaSlider.value;
         this.updateDfromNu(nuSlider.value, kappaSlider.value);
     }
 
@@ -217,9 +217,9 @@ export class Kaleidocycle {
         this.baseGeometry.vertices[0].applyMatrix4(this.transMat);
     }
 
-    updateBfromMu(mu, lambda) {
-        this.baseGeometry.vertices[1].set(mu * lambda, -this.h/2, 0);
-        this.staticBaseGeometry.vertices[1].set(mu * lambda, -this.h/2, 0);
+    updateBfromMu(mu) {
+        this.baseGeometry.vertices[1].set(mu, -this.h/2, 0);
+        this.staticBaseGeometry.vertices[1].set(mu, -this.h/2, 0);
 
         this.baseGeometry.vertices[1].applyMatrix4(this.transMat);
     }
@@ -231,9 +231,9 @@ export class Kaleidocycle {
         this.baseGeometry.vertices[2].applyMatrix4(this.transMat);
     }
 
-    updateDfromNu(nu, kappa) {
-        this.baseGeometry.vertices[3].set(0, this.h/2, nu * kappa);
-        this.staticBaseGeometry.vertices[3].set(0, this.h/2, nu * kappa);
+    updateDfromNu(nu) {
+        this.baseGeometry.vertices[3].set(0, this.h/2, nu);
+        this.staticBaseGeometry.vertices[3].set(0, this.h/2, nu);
 
         this.baseGeometry.vertices[3].applyMatrix4(this.transMat);
     }
