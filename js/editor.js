@@ -177,8 +177,9 @@ function setup() {
         }
 
         $('#save').click( function() {
+            var geomJSON = cell.geometry.toJSON();
             var dataStr = "data:text/json;charset=utf-8," 
-                        + encodeURIComponent(cell.geometry.toJSON());
+                        + encodeURIComponent(JSON.stringify(geomJSON));
 
             var a = document.createElement('a');
             a.setAttribute("href", dataStr);
