@@ -59,7 +59,7 @@ function setup() {
 
     //csg components
     cell = new t.Mesh(
-        kal.staticBaseGeometry, //this won't work because .faceVertexUVs is empty
+        kal.staticBaseGeometry,
         new t.MeshNormalMaterial({color: 0x44aa88})
     );
     scene.add(cell);
@@ -176,6 +176,18 @@ function setup() {
             scene.add(tool);
         }
 
+        $('#save').click( function() {
+            var dataStr = "data:text/json;charset=utf-8," 
+                        + encodeURIComponent(cell.geometry.toJSON());
+
+            var a = document.createElement('a');
+            a.setAttribute("href", dataStr);
+            a.setAttribute("download", "cell.json");
+            document.body.appendChild(a); // required for firefox
+            a.click();
+            a.remove();
+        });
+
         /* TOOL MODE RADIO BUTTONS*/
         $('input[type=radio][name=toolControl]').change(function() {
             controls.setMode(this.value);
@@ -215,14 +227,6 @@ function draw() {
 
     //part that loops
     function loop(time) {
-        /*
-            Logic goes here
-        */
-        
-
-        /*
-            Boilerplate
-        */
         //handle resize
         if(resizeRenderer(renderer)) {
             camera.aspect = canvas.clientWidth / canvas.clientHeight; 
