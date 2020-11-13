@@ -179,20 +179,24 @@ function setup() {
         }
 
         $('#save').click( function() {
+
             scene.remove(cell);
+            //converting geom into buffer if it isn't already
             cell.geometry = new t.BufferGeometry().fromGeometry(cell.geometry);
             scene.add(cell);
 
-            var geomJSON = cell.toJSON();
+            var cellJSON = cell.toJSON();
             var dataStr = "data:text/json;charset=utf-8," 
-                        + encodeURIComponent(JSON.stringify(geomJSON));
+                        + encodeURIComponent(JSON.stringify(cellJSON));
 
             var a = document.createElement('a');
             a.setAttribute("href", dataStr);
-            a.setAttribute("download", "cell.cma");
+            //encode the n value in the file name
+            a.setAttribute("download", "cell" + String($("#nSlider").val()) + ".cma");
             document.body.appendChild(a); // required for firefox
             a.click();
             a.remove();
+
         });
 
         //link load cell button to hidden input elem
