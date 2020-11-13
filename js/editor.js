@@ -8,6 +8,8 @@ let tool, lastCell; //cell is a shared var define in index.html
 
 let sphereGeom, cubeGeom, cylinderGeom, coneGeom;
 
+const geomLoader = new t.BufferGeometryLoader();
+
 setup();
 draw();
 
@@ -194,9 +196,32 @@ function setup() {
             $("#uploader").click();
         });
 
-        $("#uploader").change( function() {
-            let file = this.files[0];
-            console.log(file.name);
+        $("#uploader").change(function() {
+            var file = this.files[0];
+            var fileURL = URL.createObjectURL(file);
+            
+            geomLoader.load(
+                fileURL,
+
+                //onload
+                function(geometry) {
+                    URL.revokeObjectURL(fileURL); //dispose
+                    
+                    scene.remove(cell);
+                    lastCell = cell.clone();
+                    cell.geometry.dispose();
+                    cell.geometry = geometry;
+                    scene.add(cell);
+                },
+
+                //onprogress
+                function(xhr) {},
+
+                //onError
+                function() {
+                    alert("Whoops! We couldn't load your file.");
+                }
+            )
         });
 
         /* TOOL MODE RADIO BUTTONS*/
