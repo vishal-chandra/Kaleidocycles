@@ -197,9 +197,10 @@ function setup() {
             a.click();
             a.remove();
 
-            alert("your cell has been downloaded in cma format. You may choose " +
-            "to rename the file, but leave the number before the file extension " + 
-            "so that the appropriate kaleidocycle can be built.");
+            alert("Your cell has been downloaded in cma format. A number has been " +
+            "included to signify the n value of the base cell it was built from. " +
+            "If decreasing n, be aware that there may be strange effects (i.e. using " +
+            "an n=8 cell to create an n=6 kaleidocycle)");
         });
 
         //link load cell button to hidden input elem
