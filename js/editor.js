@@ -8,7 +8,7 @@ let tool, lastCell; //cell is a shared var define in index.html
 
 let sphereGeom, cubeGeom, cylinderGeom, coneGeom;
 
-const geomLoader = new t.BufferGeometryLoader();
+const cellLoader = new t.ObjectLoader();
 
 setup();
 draw();
@@ -179,7 +179,11 @@ function setup() {
         }
 
         $('#save').click( function() {
-            var geomJSON = cell.geometry.toJSON();
+            scene.remove(cell);
+            cell.geometry = new t.BufferGeometry().fromGeometry(cell.geometry);
+            scene.add(cell);
+
+            var geomJSON = cell.toJSON();
             var dataStr = "data:text/json;charset=utf-8," 
                         + encodeURIComponent(JSON.stringify(geomJSON));
 
@@ -200,17 +204,20 @@ function setup() {
             var file = this.files[0];
             var fileURL = URL.createObjectURL(file);
             
-            geomLoader.load(
+            cellLoader.load(
                 fileURL,
 
                 //onload
-                function(geometry) {
+                function(obj) {
                     URL.revokeObjectURL(fileURL); //dispose
                     
                     scene.remove(cell);
+
                     lastCell = cell.clone();
                     cell.geometry.dispose();
-                    cell.geometry = geometry;
+                    cell.material.dispose();
+                    cell = obj;
+                    
                     scene.add(cell);
                 },
 
