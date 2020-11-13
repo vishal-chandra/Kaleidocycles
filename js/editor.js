@@ -189,8 +189,14 @@ function setup() {
             a.remove();
         });
 
+        //link load cell button to hidden input elem
         $('#load').click( function() {
             $("#uploader").click();
+        });
+
+        $("#uploader").change( function() {
+            let file = this.files[0];
+            console.log(file.name);
         });
 
         /* TOOL MODE RADIO BUTTONS*/
