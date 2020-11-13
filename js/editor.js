@@ -197,6 +197,9 @@ function setup() {
             a.click();
             a.remove();
 
+            alert("your cell has been downloaded in cma format. You may choose " +
+            "to rename the file, but leave the number before the file extension " + 
+            "so that the appropriate kaleidocycle can be built.");
         });
 
         //link load cell button to hidden input elem
@@ -223,6 +226,8 @@ function setup() {
                     cell = obj;
 
                     scene.add(cell);
+
+                    alert("cell successfully loaded from cma file");
                 },
 
                 //onprogress
