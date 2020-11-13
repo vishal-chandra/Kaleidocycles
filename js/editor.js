@@ -189,7 +189,7 @@ function setup() {
 
             var a = document.createElement('a');
             a.setAttribute("href", dataStr);
-            a.setAttribute("download", "cell.json");
+            a.setAttribute("download", "cell.cma");
             document.body.appendChild(a); // required for firefox
             a.click();
             a.remove();
@@ -217,7 +217,7 @@ function setup() {
                     cell.geometry.dispose();
                     cell.material.dispose();
                     cell = obj;
-                    
+
                     scene.add(cell);
                 },
 
