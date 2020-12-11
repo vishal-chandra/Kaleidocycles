@@ -68,16 +68,19 @@ export class Kaleidocycle {
 
         this.cellGeometry = customCellGeom ? customCellGeom : this.baseGeometry;
 
-        //mesh array
+        //Kaleidocycle COLORING and mesh array creation
         this.colors = [0xFF0000, 0x6FFF00, 0x00E1FF, 0xFFA600, 0xD400FF, 0xEDCA18]
+        this.perFaceMaterial = new MeshPhongMaterial({vertexColors: FaceColors});
+
         this.tets = []
         for(let i = 0; i < this.n; i++) {
             this.tets.push(new Mesh(
                 this.cellGeometry,
-                new MeshPhongMaterial({vertexColors: FaceColors})
-                //new MeshPhongMaterial({color: this.colors[i % this.colors.length]})
+                new MeshPhongMaterial({color: this.colors[i % this.colors.length]})
             ));
         }
+        this.perFaceColoring = false;
+        //––––
 
         this.tets.forEach(
             mesh => mesh.matrixAutoUpdate = false
@@ -292,5 +295,24 @@ export class Kaleidocycle {
             ]);
         }
         geometry.computeFlatVertexNormals();
+    }
+
+    flipColorScheme() {
+        this.removeFromScene();
+
+        if(this.perFaceColoring) {
+            for(let i = 0; i < this.n; i++) {
+                this.tets[i].material = new MeshPhongMaterial({color: this.colors[i % this.colors.length]})
+            }
+        }
+        else {
+            this.tets.forEach(tet => {
+                tet.material.dispose();
+                tet.material = this.perFaceMaterial;
+            });
+        }
+        this.perFaceColoring = !this.perFaceColoring;
+
+        this.addToScene();
     }
 }
