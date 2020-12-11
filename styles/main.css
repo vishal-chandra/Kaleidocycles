@@ -16,7 +16,7 @@ header {
 
 #canvas {
   width: 75%;
-  height: 94%;
+  height: 93.5%;
   display: inline-block;
   outline: none;
 }
@@ -24,8 +24,9 @@ header {
 .controls {
   display: inline-block;
   vertical-align: top;
-  height: 110%;
+  height: 93.5%;
   width: 24%;
+  overflow: scroll;
   background-color: #a7b4c1;
 }
 
@@ -44,15 +45,6 @@ header {
 
 .controls .properties p, .controls .lengthModifiers p {
   padding: 0;
-}
-
-.debug p {
-  padding: 0;
-  margin: 0;
-}
-
-.debug:hover {
-  background-color: #e6b2a8;
 }
 
 .cellEditor {
@@ -113,6 +105,7 @@ header {
 
 .cellEditor .buttons {
   display: inline-block;
+  width: 100%;
 }
 
 .cellEditor .slider {
@@ -165,8 +158,28 @@ button:hover {
   background-color: #bdc3c7;
 }
 
+.properties button {
+  display: block;
+}
+
 .properties button:hover {
   background-color: #2d77f6;
   color: white;
+}
+
+.cellEditor .buttons #create {
+  background-color: #9ace9a;
+}
+
+.cellEditor .buttons #create:hover {
+  background-color: #82ac82;
+}
+
+.cellEditor .buttons #create, .cellEditor .buttons #toggle, .cellEditor .buttons #save, .cellEditor .buttons #load {
+  width: 47%;
+}
+
+.cellEditor .buttons #do, .cellEditor .buttons #undo, .cellEditor .buttons #reset {
+  width: 30.5%;
 }
 /*# sourceMappingURL=main.css.map */

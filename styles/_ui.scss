@@ -56,4 +56,22 @@ button {
         background-color: rgb(45, 119, 246);
         color: white;
     }
+    display: block;
+}
+
+.cellEditor .buttons {
+    #create {
+        background-color: rgb(154, 206, 154);
+        &:hover{
+            background-color: rgb(130, 172, 130);
+        }
+    }
+
+    #create, #toggle, #save, #load {
+        width: 47%;
+    }
+
+    #do, #undo, #reset {
+        width: 30.5%;
+    }
 }

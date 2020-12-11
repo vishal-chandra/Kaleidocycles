@@ -85,7 +85,6 @@ function setup() {
     //EVENT LISTENERS
     {
         let nSlider = document.getElementById('nSlider');
-        let checkbox1 = document.getElementById('checkbox1');
         let speedSlider = document.getElementById('speedSlider');
 
         let lambdaSlider = document.getElementById('lambdaSlider');
@@ -102,17 +101,6 @@ function setup() {
                 kal.destroy();
                 kal = new Kaleidocycle(1, nSlider.value, null, scene);
                 kal.addToScene(); 
-            }
-        );
-
-        checkbox1.addEventListener(
-            'change', function() {
-                let show = checkbox1.checked;
-                u.visible = show;
-                v.visible = show;
-                w.visible = show;
-                nAlpha.visible = show;
-                eAlpha.visible = show;
             }
         );
 
