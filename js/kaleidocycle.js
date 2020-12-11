@@ -10,7 +10,7 @@ import {
     Mesh,
     Matrix4,
     MeshPhongMaterial,
-    MeshBasicMaterial,
+    MeshNormalMaterial,
     Color,
     FaceColors
 } from "../lib/three/three.module.js";
@@ -68,10 +68,12 @@ export class Kaleidocycle {
 
         this.cellGeometry = customCellGeom ? customCellGeom : this.baseGeometry;
 
-        //Kaleidocycle COLORING and mesh array creation
+        //Kaleidocycle coloring reference objects 
         this.colors = [0xFF0000, 0x6FFF00, 0x00E1FF, 0xFFA600, 0xD400FF, 0xEDCA18]
         this.perFaceMaterial = new MeshPhongMaterial({vertexColors: FaceColors});
+        this.normalMaterial = new MeshNormalMaterial();
 
+        //mesh array creation
         this.tets = []
         for(let i = 0; i < this.n; i++) {
             this.tets.push(new Mesh(
@@ -308,7 +310,8 @@ export class Kaleidocycle {
         else {
             this.tets.forEach(tet => {
                 tet.material.dispose();
-                tet.material = this.perFaceMaterial;
+                tet.material = this.tets[0].geometry.vertices.length == 4 ? 
+                               this.perFaceMaterial : this.normalMaterial;
             });
         }
         this.perFaceColoring = !this.perFaceColoring;
