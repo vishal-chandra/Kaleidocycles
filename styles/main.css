@@ -146,7 +146,7 @@ header {
   background: blue;
 }
 
-.cellEditor button {
+button {
   outline: none;
   font-size: 15px;
   background-color: aliceblue;
@@ -158,7 +158,12 @@ header {
           transition-duration: 0.6s;
 }
 
-.cellEditor button:hover {
+button:hover {
   background-color: #bdc3c7;
+}
+
+.properties button:hover {
+  background-color: #2d77f6;
+  color: white;
 }
 /*# sourceMappingURL=main.css.map */
