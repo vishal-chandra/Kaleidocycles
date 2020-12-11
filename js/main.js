@@ -157,6 +157,8 @@ function setup() {
             kal.addToScene();
         }
 
+        $("#colorScheme").click(function() {kal.flipColorScheme()})
+
         $('#canvas').mousedown( function(event) {
             if(event.which == 3) {
                 stopped = !stopped;
