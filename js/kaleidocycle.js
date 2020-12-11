@@ -10,6 +10,9 @@ import {
     Mesh,
     Matrix4,
     MeshPhongMaterial,
+    MeshBasicMaterial,
+    Color,
+    FaceColors
 } from "../lib/three/three.module.js";
 
 export class Kaleidocycle {
@@ -55,6 +58,11 @@ export class Kaleidocycle {
         );
         this.computeUvs(this.baseGeometry);
 
+        this.baseGeometry.faces[0].color = new Color('red');
+        this.baseGeometry.faces[1].color = new Color('blue');
+        this.baseGeometry.faces[2].color = new Color('green');
+        this.baseGeometry.faces[3].color = new Color('yellow');
+
         //a non-rotating copy for the cell editor to reference
         this.staticBaseGeometry = this.baseGeometry.clone();
 
@@ -65,8 +73,9 @@ export class Kaleidocycle {
         this.tets = []
         for(let i = 0; i < this.n; i++) {
             this.tets.push(new Mesh(
-                this.cellGeometry, 
-                new MeshPhongMaterial({color: this.colors[i % this.colors.length]})
+                this.cellGeometry,
+                new MeshPhongMaterial({vertexColors: FaceColors})
+                //new MeshPhongMaterial({color: this.colors[i % this.colors.length]})
             ));
         }
 
