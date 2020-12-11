@@ -83,7 +83,7 @@ header {
         }
     }
 
-    div {
+    div:not(.noHover){
         box-sizing: border-box;
         border: 3px solid rgb(167, 180, 193);
 
@@ -97,11 +97,6 @@ header {
         float: left;
     }
 
-    .toolPick {
-        width: 40%;
-        float: right;
-    }
-
     .toolControlMode {
         div { //dont highlight this on hover
             border: none;
@@ -109,6 +104,10 @@ header {
         }
 
         width: 100%;
+        display: inline-block;
+    }
+
+    .buttons {
         display: inline-block;
     }
 }

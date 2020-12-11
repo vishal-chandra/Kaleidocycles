@@ -31,7 +31,6 @@
                 <option value="18">18</option>
                 <option value="20">20</option>
             </datalist>
-            <br>
 
             <button id="colorScheme">Swap Color Scheme</button>
         </div>
@@ -64,16 +63,25 @@
         <div class="cellEditor">
             <h3>Cell Editor</h3>
             <canvas id="canvas2"></canvas>
-            <div class="buttons">
-                <button id="do">Make Cut</button>
-                <button id="undo">Undo Cut</button>
-                <button id="reset">Reset Cuts</button>
-                <button id="toggle">Hide Tool</button>
-                <button id="create">Create Kal</button>
-                <button id="save">Save Cell</button>
-                
-                <input type="file" id="uploader" accept=".cma" style="display:none">
-                <button id="load">Load Cell</button>
+
+            <div class="toolPick">
+                <div class="noHover">Tool Geometry Select</div>
+                <button id="sphere">Sphere</button>
+                <button id="cube">Cube</button>
+                <button id="cyl">Cylinder</button>
+                <button id="cone">Cone</button>
+            </div>
+
+            <div class="toolControlMode">
+                <div class="noHover">Tool Control Mode (see GUI)</div>
+                <input type="radio" id="toolRotate" value="rotate" name="toolControl" checked>
+                <label for="toolRotate">Rotate</label>
+
+                <input type="radio" id="toolScale" value="scale" name="toolControl">
+                <label for="toolScale">Scale</label>
+
+                <input type="radio" id="toolTranslate" value="translate" name="toolControl">
+                <label for="toolTranslate">Translate</label>
             </div>
 
             <div class="sliders">
@@ -87,23 +95,17 @@
                 <input class='slider' id='toolZ' type='range' min='-1.5' max='1.5' step='any' value='0'>
             </div>
 
-            <div class="toolPick">
-                <button id="sphere">Sphere</button>
-                <button id="cube">Cube</button>
-                <button id="cyl">Cylinder</button>
-                <button id="cone">Cone</button>
-            </div>
-
-            <div class="toolControlMode">
-                <div>Tool Control Mode</div>
-                <input type="radio" id="toolRotate" value="rotate" name="toolControl" checked>
-                <label for="toolRotate">Rotate</label>
-
-                <input type="radio" id="toolScale" value="scale" name="toolControl">
-                <label for="toolScale">Scale</label>
-
-                <input type="radio" id="toolTranslate" value="translate" name="toolControl">
-                <label for="toolTranslate">Translate</label>
+            <div class="buttons">
+                <div class="noHover">Actions</div>
+                <button id="do">Make Cut</button>
+                <button id="undo">Undo Cut</button>
+                <button id="reset">Reset Cuts</button>
+                <button id="toggle">Hide Tool</button>
+                <button id="create">Create Kal</button>
+                <button id="save">Save Cell</button>
+                
+                <input type="file" id="uploader" accept=".cma" style="display:none">
+                <button id="load">Load Cell</button>
             </div>
 
         </div>
