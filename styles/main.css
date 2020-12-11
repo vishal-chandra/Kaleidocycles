@@ -42,6 +42,10 @@ header {
   background-color: white;
 }
 
+.controls .properties p, .controls .lengthModifiers p {
+  padding: 0;
+}
+
 .debug p {
   padding: 0;
   margin: 0;
