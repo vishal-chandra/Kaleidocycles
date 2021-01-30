@@ -178,7 +178,7 @@ function setup() {
             scene.add(tool);
         }
 
-        $('#save').click( function() {
+        $('#cma').click( function() {
 
             scene.remove(cell);
             //converting geom into buffer if it isn't already
@@ -201,6 +201,10 @@ function setup() {
             "included to signify the n value of the base cell it was built from. " +
             "If decreasing n, be aware that there may be strange effects (i.e. using " +
             "an n=8 cell to create an n=6 kaleidocycle)");
+        });
+
+        $("#stl").click( function() {
+            console.log("stl button clicked");
         });
 
         //link load cell button to hidden input elem

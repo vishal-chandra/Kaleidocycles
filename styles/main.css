@@ -175,8 +175,12 @@ button:hover {
   background-color: #82ac82;
 }
 
-.cellEditor .buttons #create, .cellEditor .buttons #toggle, .cellEditor .buttons #save, .cellEditor .buttons #load {
+.cellEditor .buttons #create, .cellEditor .buttons #toggle, .cellEditor .buttons #load {
   width: 47%;
+}
+
+.cellEditor .buttons #save, .cellEditor .buttons #stl {
+  width: 24%;
 }
 
 .cellEditor .buttons #do, .cellEditor .buttons #undo, .cellEditor .buttons #reset {
