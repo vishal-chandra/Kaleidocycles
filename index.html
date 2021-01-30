@@ -114,10 +114,21 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
 <script>
     //shared variables between main and editor
     var kal = null; //the kaleidocycle object
     var cell = null; //the mesh in the editor; geometry can be extracted.
+
+    //function from FileSaver.js github wiki
+    function saveAsFile(t,f,m) { //text, filename, mime type
+        try {
+            var b = new Blob([t],{type:m});
+            saveAs(b, f);
+        } catch (e) {
+            window.open("data:"+m+"," + encodeURIComponent(t), '_blank','');
+        }
+    }
 </script>
 <script type="module" src="js/kaleidocycle.js"></script>
 <script type="module" src="js/main.js"></script>

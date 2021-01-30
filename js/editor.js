@@ -1,6 +1,7 @@
 import * as t from "../lib/three/three.module.js";
 import {OrbitControls} from "../lib/three/OrbitControls.js";
 import {TransformControls} from "../lib/three/TransformControls.js";
+import {STLExporter} from "../lib/three/STLExporter.js";
 import CSG from "../lib/csg/CSGMesh.js";
 
 let canvas, renderer, camera, orbit, controls, scene; //render tools
@@ -9,6 +10,7 @@ let tool, lastCell; //cell is a shared var define in index.html
 let sphereGeom, cubeGeom, cylinderGeom, coneGeom;
 
 const cellLoader = new t.ObjectLoader();
+const exporter = new STLExporter();
 
 setup();
 draw();
@@ -204,7 +206,8 @@ function setup() {
         });
 
         $("#stl").click( function() {
-            console.log("stl button clicked");
+            var str = exporter.parse(cell, {binary : true})
+            saveAsFile(str, "cell.stl", "application/octet-stream");
         });
 
         //link load cell button to hidden input elem
