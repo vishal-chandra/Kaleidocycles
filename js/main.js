@@ -145,7 +145,11 @@ function setup() {
             kal.addToScene();
         }
 
-        $("#colorScheme").click(function() {kal.flipColorScheme()})
+        $("#colorScheme").click(function() {
+            kal.flipColorScheme()
+            //if it's now per face, we want the button to say by cell
+            this.innerHTML = !kal.perFaceColoring ? "Color by Face" : "Color by Cell";
+        });
 
         $('#canvas').mousedown( function(event) {
             if(event.which == 3) {
