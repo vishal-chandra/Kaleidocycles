@@ -180,7 +180,7 @@ button:hover {
 }
 
 .cellEditor .buttons #save, .cellEditor .buttons #stl {
-  width: 24%;
+  width: 26%;
 }
 
 .cellEditor .buttons #do, .cellEditor .buttons #undo, .cellEditor .buttons #reset {
