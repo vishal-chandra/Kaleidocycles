@@ -59,7 +59,7 @@ function setup() {
     scene.add(backLight);
 
     //axes
-    scene.add(new t.AxesHelper(100));
+    //scene.add(new t.AxesHelper(100));
 
     //csg components
     cell = new t.Mesh(

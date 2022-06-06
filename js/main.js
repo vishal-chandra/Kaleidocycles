@@ -30,6 +30,8 @@ function setup() {
     controls = new OrbitControls(camera, canvas);
     controls.enablePan = false;
     camera.position.z = 4;
+    camera.position.y = 1;
+    camera.position.x = 0.5;
     controls.update();
 
     /*
@@ -55,7 +57,7 @@ function setup() {
     scene.add(backLight);
 
     //axes
-    scene.add(new t.AxesHelper(100));
+    //scene.add(new t.AxesHelper(100));
 
     //Ea plane
     let points = [new t.Vector3(-10, -10*Math.tan(kal.alpha), 0), new t.Vector3(10, 10*Math.tan(kal.alpha), 0)]
